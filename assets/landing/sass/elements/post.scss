@@ -1,0 +1,196 @@
+.tw-post.tw-style2 {
+    box-shadow: 0px 5px 10px 0px rgba(106, 106, 106, 0.15);
+    text-align: center;
+    border-radius: 4px;
+    overflow: hidden;
+
+    .tw-post-thumb {
+        overflow: hidden;
+        display: block;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .tw-post-info {
+        position: relative;
+        padding: 66px 20px 25px 20px;
+    }
+
+    .tw-post-avatar {
+        position: absolute;
+        top: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 50%;
+        overflow: hidden;
+        display: block;
+
+        .tw-post-avatar-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+            background-color: rgba($green, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            color: #fff;
+            font-weight: 400;
+            opacity: 0;
+            transition: all 0.4s ease;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+
+    .tw-post-title {
+        font-size: 18px;
+        margin-bottom: 11px;
+
+        &:hover {
+            a {
+                color: $green;
+            }
+        }
+    }
+
+    .tw-post-date {
+        border-top: 1px solid $base-color4;
+        padding: 12px 20px;
+    }
+
+    .tw-post-footer {
+        position: relative;
+        height: 49px;
+
+        .tw-post-btn {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 55px;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            background-color: $green;
+            color: #fff;
+
+            &:hover {
+                color: rgba(255, 255, 255, 0.8);
+            }
+        }
+    }
+
+    &:hover {
+        .tw-post-btn {
+            top: 0;
+        }
+    }
+
+    &.tw-size-lg {
+        .tw-post-title {
+            font-size: 28px;
+        }
+    }
+}
+
+.tw-post-widget-list>li:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.tw-post.tw-style1 {
+    display: flex;
+
+    .tw-post-thumb {
+        flex: none;
+        margin-right: 10px;
+        width: 70px;
+    }
+
+    .tw-post-title {
+        font-size: 15px;
+        font-weight: 500;
+        margin-bottom: 4px;
+
+        a {
+            &:hover {
+                color: $green;
+            }
+        }
+    }
+
+    .tw-post-date {
+        font-size: 13px;
+        line-height: 1.6em;
+    }
+}
+
+.tw-categories.tw-style1 {
+    margin-top: -4px;
+
+    li {
+        font-size: 14px;
+        line-height: 1.6em;
+        margin-bottom: -2px;
+        color: #b5b5b5;
+
+        a {
+            &:hover {
+                color: $green;
+            }
+        }
+    }
+}
+
+.tw-sidebar-widget {
+    .tw-post-widget-list>li:not(:last-child) {
+        border-bottom: 1px solid $base-color4;
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+    }
+
+    .tw-post.tw-style1 .tw-post-thumb {
+        width: 80px;
+    }
+}
+
+.tw-post-pagination {
+	margin: 0;
+    justify-content: center;
+
+    .page-link {
+        padding: .5rem .75rem;
+        color: $base-color2;
+        background-color: #fff;
+        border-color: $base-color4;
+
+        &:hover {
+            background-color: $base-color5;
+            color: $base-color1;
+        }
+    }
+    .page-item {
+    	&.disabled {
+    		.page-link {
+    			color: $base-color3;
+    		}
+    	}
+    	&.active {
+			.page-link {
+	        	color: #fff;
+	        	background-color: $green;
+	        	border-color: $green;
+	        	position: relative;
+	        	z-index: 1;
+	        }
+    	}
+    }
+}

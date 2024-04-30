@@ -1,0 +1,36 @@
+/* Start Section Heading */
+.tw-section-heading.tw-style1 {
+	text-align: center;
+
+	.tw-section-heading-title {
+		font-size: 36px;
+		margin-bottom: 0;
+		margin-top: -8px;
+	}
+	.tw-section-heading-subtitle {
+	    font-size: 16px;
+	    line-height: 1.6em;
+	}
+}
+
+.tw-section-heading-seperator {
+    width: 70px;
+    height: 1px;
+    background-color: $base-color1;
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 991px) {
+.tw-section-heading.tw-style1 .tw-section-heading-title {
+    font-size: 28px;
+    margin-top: -6px;
+}
+}
+@media screen and (max-width: 575px) {
+.tw-section-heading.tw-style1 .tw-section-heading-subtitle br {
+	display: none;
+}
+}
+/* End Section Heading */

@@ -1,0 +1,348 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Attendant;
+use App\Models\DataStorage;
+use App\Models\transaction;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
+use DateTime;
+use PHPExcel_Shared_Date;
+
+class DataStorageController extends Controller
+{
+    public function index(Request $request)
+    {
+
+        if (!empty($request->from_date)  && $request->shifit !== 'Select Shift') {
+            
+            if (is_null($request->from_date)) {
+                
+                $query = DB::table('drop_data')
+                    ->leftJoin('attendants', 'drop_data.Card_number', '=', 'attendants.Card_number');
+
+                if ($request->shifit && $request->shifit !== 'Select Shift') {
+                    // Handle filtering for shift, including handling shift = 0
+                    $query->where('shift', '=', $request->shifit);
+                }
+
+                $csvs = $query->orderBy(DB::raw("STR_TO_DATE(DateTime, '%d/%m/%Y %H:%i')"), 'DESC')
+                    ->select('drop_data.*', 'attendants.Card_name')
+                    ->get();
+
+                return view('data.index', compact('csvs'));
+            } else {
+                //dd('here');
+                $query = DB::table('drop_data')
+                    ->leftJoin('attendants', 'drop_data.Card_number', '=', 'attendants.Card_number');
+
+                
+                $fromDate = date('d/m/Y', strtotime(str_replace('/', '-', $request->from_date)));
+
+                $query->whereRaw("STR_TO_DATE(DateTime, '%d/%m/%Y %H:%i') >= STR_TO_DATE('" . $fromDate . " 00:00', '%d/%m/%Y %H:%i')")
+                        ->whereRaw("STR_TO_DATE(DateTime, '%d/%m/%Y %H:%i') <= STR_TO_DATE('" . $fromDate . " 23:59', '%d/%m/%Y %H:%i')");
+                
+
+          
+                    // Handle filtering for shift, including handling shift = 0        
+                    $query->where('shift', '=', $request->shifit);
+                
+
+                $csvs = $query->orderBy(DB::raw("STR_TO_DATE(DateTime, '%d/%m/%Y %H:%i')"), 'DESC')
+                    ->select('drop_data.*', 'attendants.Card_name')
+                    ->get();
+
+                return view('data.index', compact('csvs'));
+            }
+        } else if (!empty($request->from_date)  && $request->shifit == 'Select Shift') {
+            $query = DB::table('drop_data')
+                ->leftJoin('attendants', 'drop_data.Card_number', '=', 'attendants.Card_number');
+
+
+            $fromDate = date('d/m/Y', strtotime(str_replace('/', '-', $request->from_date)));
+
+            $query->whereRaw("STR_TO_DATE(DateTime, '%d/%m/%Y %H:%i') >= STR_TO_DATE('" . $fromDate . " 00:00', '%d/%m/%Y %H:%i')")
+                ->whereRaw("STR_TO_DATE(DateTime, '%d/%m/%Y %H:%i') <= STR_TO_DATE('" . $fromDate . " 23:59', '%d/%m/%Y %H:%i')");
+
+            $csvs = $query->orderBy(DB::raw("STR_TO_DATE(DateTime, '%d/%m/%Y %H:%i')"), 'DESC')
+                ->select('drop_data.*', 'attendants.Card_name')
+                ->get();
+
+            return view('data.index', compact('csvs'));
+        } else if ($request->shifit === '0') {
+           
+           
+            $query = DB::table('drop_data')
+                ->leftJoin('attendants', 'drop_data.Card_number', '=', 'attendants.Card_number');
+            $query->where('shift', '=', 0);
+            $csvs = $query->orderBy(DB::raw("STR_TO_DATE(DateTime, '%d/%m/%Y %H:%i')"), 'DESC')
+                ->select('drop_data.*', 'attendants.Card_name')
+                ->get();
+            return view('data.index', compact('csvs'));
+        } else {
+            $csvs = DB::table('drop_data')
+                ->leftJoin('attendants', 'drop_data.Card_number', '=', 'attendants.Card_number')
+                ->orderBy(DB::raw("STR_TO_DATE(DateTime, '%d/%m/%Y %H:%i')"), 'DESC')
+                ->select('drop_data.*', 'attendants.Card_name')
+                ->take(50)
+                ->get();
+
+            return view('data.index', compact('csvs'));
+        }
+
+
+
+
+        // return view('data.index', compact('csvs'));
+    }
+
+    public function create()
+    {
+
+        return view('data.create');
+    }
+
+    public function shiftList(Request $request)
+    {
+
+        if ($request->from_date && $request->shift && $request->shift !== 'Select Shift') {
+
+            $transactions = transaction::select('*')->when($request->from_date, function ($query) use ($request) {
+                return $query->whereDate('date', $request->from_date);
+            })->when($request->shift, function ($query) use ($request) {
+                return $query->where('shift', $request->shift);
+            })->get();
+        } else {
+            $transactions = transaction::orderBy('created_at', 'desc')->take(50)->orderBy('id', 'desc')->get();
+        }
+
+        return view('data.list', compact('transactions'));
+    }
+
+
+ 
+
+    // import csv file
+    public function importCsv(Request $request)
+    {
+
+        if ($request->shift == 'day') {
+            $shift = 0;
+        } else {
+            $shift = 1;
+        }
+
+        $request->validate([
+            'csv_file' => 'required|mimes:csv,txt,xlsx'
+        ]);
+      
+      
+
+        $file = $request->file('csv_file');
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+        $file->move('assets/uploads/csv/', $filename);
+        $filepath = public_path('assets/uploads/csv/' . $filename);
+
+        if ($file->getClientOriginalExtension() === 'xlsx') {
+            info('xlsx');
+            $importData_arr = Excel::toArray([], $filepath)[0];
+            $expectedHeaders = ["Device Transaction Index", "Card Number", "Transaction Date", "Amount"];
+            $firstRowHeaders = array_values($importData_arr[0]);
+            if ($firstRowHeaders !== $expectedHeaders) {
+                // Show a warning message to the user and stop further execution
+                return response()->json(['error' => 'Invalid column headers in the first row. Please make sure the first row has the following headers: Date time, Card number, Sequence, Total.'], 400);
+            }
+            array_shift($importData_arr);
+            foreach ($importData_arr as &$row) {
+
+                $excelDate = $row[2];
+                $unixTimestamp =  PHPExcel_Shared_Date::ExcelToPHP($excelDate);
+                $dateTime = new DateTime("@$unixTimestamp");
+                $dateStr = $dateTime->format('Y-m-d H:i');
+                $row[2] = $dateStr;
+            }
+        } else {
+            $file = fopen($filepath, "r");
+            $importData_arr = array();
+            $i = 0;
+            while (($filedata = fgetcsv($file, 1000, ",")) !== FALSE) {
+                $num = count($filedata);
+
+                if ($num != 4) {
+                    fclose($file);
+                    return back()->with('warning', 'Each row of CSV file should have exactly 4 fields.');
+                }
+                // Skip first row (Remove below comment if you want to skip the first row)
+                if ($i == 0) {
+                    $i++;
+                    continue;
+                }
+                for ($c = 0; $c < $num; $c++) {
+                    $importData_arr[$i][] = $filedata[$c];
+                }
+                $i++;
+            }
+            fclose($file);
+        }
+
+        $data = [];
+        
+        
+        foreach ($importData_arr as $importData) {
+            $totalValue = intval(preg_replace('/,[^,]*$/', '', $importData[3]));
+
+            $cardNumber = $importData[1];
+            $attendant  = Attendant::where('Card_number', $cardNumber)->first();
+            if ($attendant) {
+                // shawtever id the format of date Time in csv covert it to d/m/y H:i
+                $dateTime = null;
+               
+               
+                if (preg_match('/^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}$/', $importData[2])) {
+                    // first one yyyy-mm-dd hh:mm
+                   
+                   
+
+                    $dateTime = \DateTime::createFromFormat('Y-m-d H:i', $importData[2]);
+                } elseif (preg_match('/^\d{1,2}\/\d{1,2}\/\d{2}\s+\d{1,2}:\d{1,2}$/', $importData[2])) {
+                  
+                  
+                    $dateTime = \DateTime::createFromFormat('d/m/y H:i', $importData[2]);
+                } elseif (preg_match('/^\d{1,2}-\d{1,2}-\d{4}\s+\d{1,2}:\d{1,2}$/', $importData[2])) {
+                    
+                    
+
+                    $dateTime = \DateTime::createFromFormat('d-m-Y H:i', $importData[2]);
+                }
+                // elseif (preg_match('/^\d{1,2}\/\d{1,2}\/\d{4}\s+\d{1,2}:\d{1,2}$/', $importData[2])) {
+                //     // dd('bare');
+                //     $dateTime = \DateTime::createFromFormat('m/d/Y H:i', $importData[2]);
+                //     dd('bare', $dateTime,  $importData[2]);
+                // }
+                else if (preg_match('/^\d{2}\/\d{2}\/\d{4}\s+\d{1,2}:\d{1,2}$/', $importData[2])) {
+                    // Format: dd/mm/yyyy hh:mm
+
+                    $dateTime = \DateTime::createFromFormat('d/m/Y H:i', $importData[2]);
+                    // dd('bare', $dateTime,  $importData[2]);
+                    // ...
+                }
+
+
+                if ($dateTime) {
+                    $dateTimeFormatted = $dateTime->format('d/m/Y H:i');
+                    // dd($dateTimeFormatted, $dateTime);         
+                    $data[] = [
+                        'DateTime' => $dateTimeFormatted,
+                        'Card_number' => $importData[1],
+                        'Sequence' => $importData[0],
+                        'Total' => $totalValue,
+                        'shift' => $shift,
+                        'Card_id' => $attendant->id,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ];
+                }
+            }
+        }
+
+        if (empty($data)) {
+            return redirect()->route('storage.create')->with('error', 'No valid data found in the file');
+        }
+
+        //check if the data is already in the database, by checking the sequence which is unique in the arrays of data
+        //if the data is not in the database, insert it
+        //use if in_array($needle, $haystack) to check if the data is in the database
+        $Sequence = array_column($data, 'Sequence');
+        $db = DataStorage::all();
+        $dbSequence = array_column($db->toArray(), 'Sequence');
+        //compare the two arrays, if any element in the first array is in 
+        $diff = array_diff($Sequence, $dbSequence);
+        if (count($diff) > 0) {
+            DataStorage::insert($data);
+            unlink($filepath);
+        } else {
+            return redirect()->route('storage.create')->with('error', 'Data already exists in the database');
+        }
+
+        return redirect()->route('transaction.create')->with('message', 'Data imported successfully');
+    }
+
+    //delete data
+    public function delete($id)
+    {
+
+        $csv = DataStorage::find($id);
+        $csv->delete();
+        return redirect()->route('storage.index')->with('message', 'Data deleted Successfully');
+    }
+
+    //mass Delete Drops from Data Storage 
+    public function massDeleteDrops(Request $request)
+    {
+        $ids = $request->ids;
+
+        try {
+            DataStorage::whereIn('id', $ids)->delete(); //assuming Drop is the model for the drops
+            $response = [
+                'success' => true,
+                'message' => 'Drops successfully deleted.'
+            ];
+        } catch (\Exception $e) {
+            $response = [
+                'success' => false,
+                'error' => [
+                    'message' => 'Error deleting drops.',
+                    'details' => $e->getMessage()
+                ]
+            ];
+        }
+
+        return response()->json($response);
+    }
+
+
+    //show data
+    public function show($id)
+    {
+        $csv = DataStorage::find($id);
+        return view('data.show', compact('csv'));
+    }
+
+    //edit data
+    public function edit($id)
+    {
+        $csv = DataStorage::find($id);
+        return view('data.edit', compact('csv'));
+    }
+
+    //update data
+    public function update(Request $request, $id)
+    {
+
+        $request->validate([
+            'DateTime' => 'required',
+            'Card_number' => 'required',
+            'Total' => 'required',
+        ]);
+        $date = \Carbon\Carbon::createFromFormat('Y-m-d\TH:i', $request->DateTime);
+        $formatted_date = $date->format('d/m/Y H:i');
+
+
+        $csv = DataStorage::find($id);
+        $csv->DateTime =  $formatted_date;
+        $csv->save();
+        return redirect()->route('storage.index')->with('message', 'Data updated Successfully');
+    }
+
+    //destroy data
+    public function destroy($id)
+    {
+        $csv = DataStorage::find($id);
+        $csv->delete();
+        return redirect()->route('storage.index')->with('message', 'Drop Data deleted Successfully');
+    }
+}

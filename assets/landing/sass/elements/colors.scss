@@ -1,0 +1,2435 @@
+// Base Color
+body.tw-night-mode,
+html.tw-night-mode {
+    color: $dark-base-color2;
+    background-color: $dark-main-color;
+}
+
+.tw-night-mode {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h3,
+    h6 {
+        color: $dark-base-color1;
+    }
+
+    .tw-hero.tw-style1 .tw-hero-text.tw-style1 .tw-hero-title {
+        color: $base-color1;
+    }
+
+    .tw-hero.tw-style1 .tw-hero-text.tw-style1 .tw-hero-subtitle {
+        color: $base-color2;
+    }
+
+    .tw-content {
+        background-color: $dark-main-color;
+    }
+
+    .tw-gray-bg {
+        background-color: $dark-base-color5;
+    }
+
+    .tw-gray-overlay {
+        &:before {
+            background-color: rgba($dark-base-color5, 0.86);
+        }
+    }
+
+    hr,
+    .tw-widget,
+    .tw-widget-list li:not(:last-child),
+    .tw-sidebar-widget .tw-post-widget-list > li:not(:last-child),
+    .tw-tagcloud .tw-tag,
+    .tw-post-details.tw-style1 .tw-post-meta,
+    .comments-area,
+    .comment-respond,
+    .comment-form textarea, .comment-form input {
+        border-color: $dark-base-color4;
+    }
+    .comment-form textarea, .comment-form input {
+        &:focus {
+            border-color: $dark-base-color2;
+            color: #fff;
+        }
+    }
+
+    .tw-widget-list a:hover,
+    .tw-post.tw-style1 .tw-post-title a:hover,
+    .tw-footer-widget-nav a:hover,
+    .tw-social-btn.tw-style1 li a:hover,
+    .tw-post.tw-style1 .tw-post-title a:hover,
+    .tw-categories.tw-style1 li a:hover {
+        color: #fff !important;
+    }
+
+    .tw-parallax-shape.tw-style1 {
+        border: 30px solid $dark-base-color5;
+    }
+
+    .tw-parallax-shape.tw-style2 {
+        background-color: $dark-base-color5;
+    }
+
+    .tw-top-header {
+        background-color: $base-color1;
+        border-bottom: 1px solid $dark-base-color4;
+    }
+
+    .tw-top-header-list {
+
+        li {
+            color: $dark-base-color2;
+
+            i {
+                color: $dark-base-color3;
+            }
+
+            a:hover {
+                color: #fff;
+            }
+        }
+    }
+
+    .tw-site-header.tw-style1 {
+        background-color: rgba($dark-main-color, 0.9);
+        box-shadow: 0 10px 10px -10px rgba(33, 43, 53, 0.1);
+
+        &.tw-sticky-active {
+            background-color: $dark-main-color;
+            border-bottom: 1px solid $dark-base-color4;
+        }
+    }
+
+    @media screen and (max-width: 991px) {
+        .tw-site-header.tw-style1 {
+            background-color: $dark-main-color;
+        }
+    }
+
+    @media screen and (min-width: 992px) {
+        .tw-nav {
+            .tw-nav-list {
+                >li {
+                    >ul {
+                        &:before {
+                            border-color: $dark-base-color4;
+                            background-color: $dark-main-color;
+                        }
+                    }
+                }
+
+                ul {
+                    background-color: $dark-main-color;
+                    border: 1px solid $dark-base-color4;
+
+                    a {
+
+                        &:hover {
+                            background-color: $dark-base-color5;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 991px) {
+        .tw-munu-dropdown-toggle {
+
+            &:before,
+            &:after {
+                background-color: $dark-base-color2;
+            }
+        }
+
+        .tw-nav {
+            .tw-nav-list {
+                background-color: $dark-main-color;
+                border-top: 1px solid $dark-base-color4;
+                border-bottom: 1px solid $dark-base-color4;
+
+            }
+
+            .menu-item-has-children {
+                position: relative;
+            }
+        }
+
+        /*Mobile Menu Button*/
+        .tw-munu-toggle {
+
+            span,
+            span:before,
+            span:after {
+                width: 100%;
+                height: 2px;
+                background-color: rgba(255, 255, 255, 0.6);
+                display: block;
+            }
+        }
+
+        .tw-toggle-active {
+            span {
+                background-color: rgba(255, 255, 255, 0.0);
+            }
+        }
+    }
+
+    .tw-isotop-filter.tw-style1 {
+        li {
+
+            a {
+                &:hover {
+                    color: $green;
+                }
+            }
+
+            &.active {
+                a {
+                    background-color: $dark-base-color5;
+                    color: $green;
+                }
+            }
+        }
+    }
+
+    .tw-project {
+        &:before {
+            background: rgba($dark-main-color, 0.5);
+        }
+    }
+
+    .tw-logo-carousel.tw-style1 {
+        border: 1px solid $dark-base-color4;
+    }
+
+    .tw-news-letter-form {
+        #subscriber-email {
+            border: 1px solid $dark-base-color4;
+            background-color: $dark-main-color;
+        }
+    }
+
+    .tw-contact-number {
+        h3 {
+            color: $dark-base-color2;
+        }
+    }
+
+    .tw-post.tw-style2 {
+        .tw-post-date {
+            border-top: 1px solid $dark-base-color4;
+        }
+    }
+
+    .tw-pricing-table.tw-style1 {
+
+        .tw-pricing-head-in {
+            background-color: $dark-base-color5;
+        }
+
+        .tw-price-per {
+            color: $dark-base-color3;
+        }
+    }
+
+    .tw-section-heading-seperator {
+        background-color: $dark-base-color1;
+    }
+
+    .tw-progressbar {
+        background-color: $dark-base-color4;
+    }
+
+    .pagination.tw-style1,
+    .pagination.tw-style2 {
+        li {
+            background-color: $dark-base-color2;
+        }
+    }
+
+    .tw-slider.tw-style2 {
+        .slick-arrow {
+            &:hover {
+                color: $dark-base-color1;
+            }
+        }
+    }
+
+    .tw-testimonial.tw-style1 {
+        .tw-testimonial-info {
+            border-top: 1px solid $dark-base-color4;
+        }
+    }
+
+    .tw-form-field label {
+        background-color: $dark-main-color;
+    }
+
+    .tw-contact-form .tw-form-field input,
+    .tw-contact-form .tw-form-field textarea,
+    .tw-contact-form .tw-form-field selec {
+        border-color: $dark-base-color4;
+    }
+
+    .tw-iconbox.tw-style1,
+    .tw-imagebox.tw-style1,
+    .tw-pricing-table.tw-style1,
+    .tw-post.tw-style2,
+    .tw-testimonial.tw-style1,
+    .tw-slider.tw-style2 .slick-arrow {
+        box-shadow: none;
+        background-color: $dark-base-color5;
+    }
+
+    .tw-post.tw-style2 {
+        border: 1px solid $dark-base-color4;
+    }
+
+    .tw-main-footer {
+        background-color: $dark-base-color5;
+    }
+
+    .tw-footer-widget-title:before {
+        background-color: $dark-base-color4;
+    }
+
+    .tw-social-btn.tw-style1 li {
+        color: $dark-base-color1;
+    }
+
+    .tw-slider.tw-style2 .slick-arrow {
+        border: 1px solid $dark-base-color3;
+    }
+    .pagination {
+        .page-link {
+            color: $dark-base-color2;
+            background-color: $dark-main-color;
+            border-color: $dark-base-color4;
+
+            &:hover {
+                background-color: $dark-base-color5;
+                color: $dark-base-color1;
+            }
+        }
+        .page-item {
+            &.disabled {
+                .page-link {
+                    color: $dark-base-color3;
+                }
+            }
+            &.active {
+                .page-link {
+                    color: #fff;
+                    background-color: $green;
+                    border-color: $green;
+                    position: relative;
+                    z-index: 1;
+                }
+            }
+        }
+    }
+    .comment-author .nm, 
+    .comment-author .nm a {
+        color: $dark-base-color1;
+    }
+    .tw-post-tage-list li a:hover,
+    .tw-post-share-btn-list a:hover {
+        color: #fff;
+    }
+}
+
+.tw-night-mode .tw-pricing-table.tw-style1 .tw-pricing-head-in {
+    background-color: #181818;
+}
+
+// Accen Color
+.tw-green {
+
+    // Buttons
+    .tw-btn.tw-style1.tw-color1 {
+        background-color: $green;
+    }
+
+    .tw-btn.tw-style2.tw-color1 {
+        background-color: rgba($green, 0.1);
+        border-color: $green;
+        color: $green;
+    }
+
+    .tw-btn.tw-style2.tw-color1:hover {
+        background-color: $green;
+    }
+
+    .tw-tagcloud .tw-tag:hover {
+        background-color: $green;
+    }
+
+    .tw-widget .tw-widget-title:before {
+        background-color: $green;
+    }
+    // Client
+    .tw-member.tw-style1 {
+        .tw-member-meta {
+            background-color: rgba($green, 0.9);
+        }
+
+        &:hover {
+            .tw-member-meta {
+                background-color: $green;
+            }
+        }
+    }
+
+    /*Contact*/
+    .tw-form-field input:focus~label,
+    .tw-form-field input:valid~label,
+    .tw-form-field textarea:focus~label,
+    .tw-form-field textarea:valid~label,
+    .tw-form-field select:focus~label,
+    .tw-form-field select:valid~label {
+        background-color: $green;
+    }
+
+    .tw-contact-form .tw-form-field input:focus,
+    .tw-contact-form .tw-form-field textarea:focus,
+    .tw-contact-form .tw-form-field select:focus,
+    .tw-contact-form .tw-form-field input:valid,
+    .tw-contact-form .tw-form-field textarea:valid {
+        border-color: $green;
+    }
+
+    .tw-contact-info-list {
+        li {
+            i {
+                color: $green;
+            }
+
+            a {
+                &:hover {
+                    color: $green;
+                }
+            }
+        }
+    }
+
+    // Footer
+    .tw-social-btn.tw-style1 {
+        li {
+            a {
+                &:hover {
+                    color: $green;
+                }
+            }
+        }
+    }
+
+    // FunFact
+    .tw-funfact.tw-style1 {
+        .tw-funfact-icon {
+            color: $green;
+        }
+    }
+
+    // Header
+    @media screen and (min-width: 992px) {
+        .tw-nav {
+            .tw-nav-list {
+                li {
+                    a {
+                        &.active {
+                            color: $green;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Icon Box
+    .tw-iconbox.tw-style1 {
+        .tw-iconbox-icon {
+            color: $green;
+            border: 1px solid $green;
+        }
+
+        &:hover {
+            .tw-iconbox-icon {
+                color: #fff;
+                background-color: $green;
+            }
+        }
+        &.tw-type1 .tw-iconbox-icon {
+            background-color: $green;
+            color: #fff;
+        }
+    }
+
+    // Image Box
+    .tw-imagebox.tw-style1 {
+        .tw-imagebox-title {
+            a {
+                &:hover {
+                    color: $green;
+                }
+            }
+        }
+    }
+
+    // Isotope
+    .tw-isotop-filter.tw-style1 {
+        li {
+
+            a {
+                &:hover {
+                    color: $green;
+                }
+            }
+
+            &.active {
+                a {
+                    color: $green;
+                }
+            }
+        }
+    }
+
+    .pagination.tw-style1,
+    .pagination.tw-style2 {
+        li {
+            &.slick-active {
+                background-color: $green;
+            }
+        }
+    }
+
+    .tw-text-block.tw-style1 {
+        .tw-text-block-subtitle {
+            color: $green;
+        }
+    }
+
+    .tw-list.tw-style1 li:before {
+        background: $green;
+    }
+
+    .tw-progressbar-in {
+        background-color: $green;
+    }
+
+    .tw-progressbar-percentage {
+        color: $green;
+    }
+
+    .tw-pricing-table.tw-style1 {
+        .tw-price {
+            color: $green;
+        }
+    }
+
+    .tw-pricing-wrap:hover {
+        .tw-pricing-table:hover {
+            .tw-btn {
+                background-color: $green;
+                color: #fff;
+            }
+
+            .tw-pricing-head-in {
+                background-color: $green;
+            }
+
+            .tw-price {
+                color: #fff;
+            }
+
+            .tw-price-per {
+                color: rgba(255, 255, 255, 0.8);
+            }
+        }
+    }
+
+    .tw-post.tw-style2 {
+
+        .tw-post-avatar {
+            .tw-post-avatar-text {
+                background-color: rgba($green, 0.9);
+                color: #fff;
+            }
+        }
+
+        .tw-post-title {
+            &:hover {
+                a {
+                    color: $green;
+                }
+            }
+        }
+
+        .tw-post-footer {
+            .tw-post-btn {
+                background-color: $green;
+                color: #fff;
+
+                &:hover {
+                    color: rgba(255, 255, 255, 0.8);
+                }
+            }
+        }
+    }
+
+    .tw-testimonial.tw-style1 {
+        .tw-quote {
+            color: rgba($green, 0.1);
+        }
+    }
+
+    .tw-news-letter-form {
+        #subscriber-email {
+            &:focus {
+                border-color: $green;
+            }
+        }
+    }
+
+    .tw-contact-number {
+        i {
+            color: $green;
+        }
+
+        .tw-mobile-number {
+            color: $green;
+        }
+    }
+    .pagination {
+        .page-item {
+            &.active {
+                .page-link {
+                    background-color: $green;
+                    border-color: $green;
+                }
+            }
+        }
+    }
+}
+
+.tw-blue {
+
+    // Buttons
+    .tw-btn.tw-style1.tw-color1 {
+        background-color: $blue;
+    }
+
+    .tw-btn.tw-style2.tw-color1 {
+        background-color: rgba($blue, 0.1);
+        border-color: $blue;
+        color: $blue;
+    }
+
+    .tw-btn.tw-style2.tw-color1:hover {
+        background-color: $blue;
+    }
+
+    .tw-tagcloud .tw-tag:hover {
+        background-color: $blue;
+    }
+
+    .tw-widget .tw-widget-title:before {
+        background-color: $blue;
+    }
+
+    // Client
+    .tw-member.tw-style1 {
+        .tw-member-meta {
+            background-color: rgba($blue, 0.9);
+        }
+
+        &:hover {
+            .tw-member-meta {
+                background-color: $blue;
+            }
+        }
+    }
+
+    /*Contact*/
+    .tw-form-field input:focus~label,
+    .tw-form-field input:valid~label,
+    .tw-form-field textarea:focus~label,
+    .tw-form-field textarea:valid~label,
+    .tw-form-field select:focus~label,
+    .tw-form-field select:valid~label {
+        background-color: $blue;
+    }
+
+    .tw-contact-form .tw-form-field input:focus,
+    .tw-contact-form .tw-form-field textarea:focus,
+    .tw-contact-form .tw-form-field select:focus,
+    .tw-contact-form .tw-form-field input:valid,
+    .tw-contact-form .tw-form-field textarea:valid {
+        border-color: $blue;
+    }
+
+    .tw-contact-info-list {
+        li {
+            i {
+                color: $blue;
+            }
+
+            a {
+                &:hover {
+                    color: $blue;
+                }
+            }
+        }
+    }
+
+    // Footer
+
+    .tw-post.tw-style1 {
+        .tw-post-title {
+            a {
+                &:hover {
+                    color: $blue;
+                }
+            }
+        }
+    }
+
+
+    // FunFact
+    .tw-funfact.tw-style1 {
+        .tw-funfact-icon {
+            color: $blue;
+        }
+    }
+
+    // Header
+    @media screen and (min-width: 992px) {
+        .tw-nav {
+            .tw-nav-list {
+                li {
+                    a {
+                        &.active {
+                            color: $blue;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Icon Box
+    .tw-iconbox.tw-style1 {
+        .tw-iconbox-icon {
+            color: $blue;
+            border: 1px solid $blue;
+        }
+
+        &:hover {
+            .tw-iconbox-icon {
+                color: #fff;
+                background-color: $blue;
+            }
+        }
+        &.tw-type1 .tw-iconbox-icon {
+            background-color: $blue;
+            color: #fff;
+        }
+    }
+
+    // Image Box
+    .tw-imagebox.tw-style1 {
+        .tw-imagebox-title {
+            a {
+                &:hover {
+                    color: $blue;
+                }
+            }
+        }
+    }
+
+    // Isotope
+    .tw-isotop-filter.tw-style1 {
+        li {
+
+            a {
+                &:hover {
+                    color: $blue;
+                }
+            }
+
+            &.active {
+                a {
+                    color: $blue;
+                }
+            }
+        }
+    }
+
+    .pagination.tw-style1,
+    .pagination.tw-style2 {
+        li {
+            &.slick-active {
+                background-color: $blue;
+            }
+        }
+    }
+
+    .tw-text-block.tw-style1 {
+        .tw-text-block-subtitle {
+            color: $blue;
+        }
+    }
+
+    .tw-list.tw-style1 li:before {
+        background: $blue;
+    }
+
+    .tw-progressbar-in {
+        background-color: $blue;
+    }
+
+    .tw-progressbar-percentage {
+        color: $blue;
+    }
+
+    .tw-pricing-table.tw-style1 {
+        .tw-price {
+            color: $blue;
+        }
+    }
+
+    .tw-pricing-wrap:hover {
+        .tw-pricing-table:hover {
+            .tw-btn {
+                background-color: $blue;
+                color: #fff;
+            }
+
+            .tw-pricing-head-in {
+                background-color: $blue;
+            }
+
+            .tw-price {
+                color: #fff;
+            }
+
+            .tw-price-per {
+                color: rgba(255, 255, 255, 0.8);
+            }
+        }
+    }
+
+    .tw-post.tw-style2 {
+
+        .tw-post-avatar {
+            .tw-post-avatar-text {
+                background-color: rgba($blue, 0.9);
+                color: #fff;
+            }
+        }
+
+        .tw-post-title {
+            &:hover {
+                a {
+                    color: $blue;
+                }
+            }
+        }
+
+        .tw-post-footer {
+            .tw-post-btn {
+                background-color: $blue;
+                color: #fff;
+
+                &:hover {
+                    color: rgba(255, 255, 255, 0.8);
+                }
+            }
+        }
+    }
+
+    .tw-testimonial.tw-style1 {
+        .tw-quote {
+            color: rgba($blue, 0.1);
+        }
+    }
+
+    .tw-news-letter-form {
+        #subscriber-email {
+            &:focus {
+                border-color: $blue;
+            }
+        }
+    }
+
+    .tw-contact-number {
+        i {
+            color: $blue;
+        }
+
+        .tw-mobile-number {
+            color: $blue;
+        }
+    }
+    .pagination {
+        .page-item {
+            &.active {
+                .page-link {
+                    background-color: $blue;
+                    border-color: $blue;
+                }
+            }
+        }
+    }
+}
+
+.tw-indigo {
+    // Buttons
+    .tw-btn.tw-style1.tw-color1 {
+        background-color: $indigo;
+    }
+
+    .tw-btn.tw-style2.tw-color1 {
+        background-color: rgba($indigo, 0.1);
+        border-color: $indigo;
+        color: $indigo;
+    }
+
+    .tw-btn.tw-style2.tw-color1:hover {
+        background-color: $indigo;
+    }
+
+    .tw-tagcloud .tw-tag:hover {
+        background-color: $indigo;
+    }
+
+    .tw-widget .tw-widget-title:before {
+        background-color: $indigo;
+    }
+
+    // Client
+    .tw-member.tw-style1 {
+        .tw-member-meta {
+            background-color: rgba($indigo, 0.9);
+        }
+
+        &:hover {
+            .tw-member-meta {
+                background-color: $indigo;
+            }
+        }
+    }
+
+    /*Contact*/
+    .tw-form-field input:focus~label,
+    .tw-form-field input:valid~label,
+    .tw-form-field textarea:focus~label,
+    .tw-form-field textarea:valid~label,
+    .tw-form-field select:focus~label,
+    .tw-form-field select:valid~label {
+        background-color: $indigo;
+    }
+
+    .tw-contact-form .tw-form-field input:focus,
+    .tw-contact-form .tw-form-field textarea:focus,
+    .tw-contact-form .tw-form-field select:focus,
+    .tw-contact-form .tw-form-field input:valid,
+    .tw-contact-form .tw-form-field textarea:valid {
+        border-color: $indigo;
+    }
+
+    .tw-contact-info-list {
+        li {
+            i {
+                color: $indigo;
+            }
+
+            a {
+                &:hover {
+                    color: $indigo;
+                }
+            }
+        }
+    }
+
+    // FunFact
+    .tw-funfact.tw-style1 {
+        .tw-funfact-icon {
+            color: $indigo;
+        }
+    }
+
+    // Header
+    @media screen and (min-width: 992px) {
+        .tw-nav {
+            .tw-nav-list {
+                li {
+                    a {
+                        &.active {
+                            color: $indigo;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Icon Box
+    .tw-iconbox.tw-style1 {
+        .tw-iconbox-icon {
+            color: $indigo;
+            border: 1px solid $indigo;
+        }
+
+        &:hover {
+            .tw-iconbox-icon {
+                color: #fff;
+                background-color: $indigo;
+            }
+        }
+        &.tw-type1 .tw-iconbox-icon {
+            background-color: $indigo;
+            color: #fff;
+        }
+    }
+
+    // Image Box
+    .tw-imagebox.tw-style1 {
+        .tw-imagebox-title {
+            a {
+                &:hover {
+                    color: $indigo;
+                }
+            }
+        }
+    }
+
+    // Isotope
+    .tw-isotop-filter.tw-style1 {
+        li {
+
+            a {
+                &:hover {
+                    color: $indigo;
+                }
+            }
+
+            &.active {
+                a {
+                    color: $indigo;
+                }
+            }
+        }
+    }
+
+    .pagination.tw-style1,
+    .pagination.tw-style2 {
+        li {
+            &.slick-active {
+                background-color: $indigo;
+            }
+        }
+    }
+
+    .tw-text-block.tw-style1 {
+        .tw-text-block-subtitle {
+            color: $indigo;
+        }
+    }
+
+    .tw-list.tw-style1 li:before {
+        background: $indigo;
+    }
+
+    .tw-progressbar-in {
+        background-color: $indigo;
+    }
+
+    .tw-progressbar-percentage {
+        color: $indigo;
+    }
+
+    .tw-pricing-table.tw-style1 {
+        .tw-price {
+            color: $indigo;
+        }
+    }
+
+    .tw-pricing-wrap:hover {
+        .tw-pricing-table:hover {
+            .tw-btn {
+                background-color: $indigo;
+                color: #fff;
+            }
+
+            .tw-pricing-head-in {
+                background-color: $indigo;
+            }
+
+            .tw-price {
+                color: #fff;
+            }
+
+            .tw-price-per {
+                color: rgba(255, 255, 255, 0.8);
+            }
+        }
+    }
+
+    .tw-post.tw-style2 {
+
+        .tw-post-avatar {
+            .tw-post-avatar-text {
+                background-color: rgba($indigo, 0.9);
+                color: #fff;
+            }
+        }
+
+        .tw-post-title {
+            &:hover {
+                a {
+                    color: $indigo;
+                }
+            }
+        }
+
+        .tw-post-footer {
+            .tw-post-btn {
+                background-color: $indigo;
+                color: #fff;
+
+                &:hover {
+                    color: rgba(255, 255, 255, 0.8);
+                }
+            }
+        }
+    }
+
+    .tw-testimonial.tw-style1 {
+        .tw-quote {
+            color: rgba($indigo, 0.1);
+        }
+    }
+
+    .tw-news-letter-form {
+        #subscriber-email {
+            &:focus {
+                border-color: $indigo;
+            }
+        }
+    }
+
+    .tw-contact-number {
+        i {
+            color: $indigo;
+        }
+
+        .tw-mobile-number {
+            color: $indigo;
+        }
+    }
+    .pagination {
+        .page-item {
+            &.active {
+                .page-link {
+                    background-color: $indigo;
+                    border-color: $indigo;
+                }
+            }
+        }
+    }
+}
+
+.tw-purple {
+
+    // Buttons
+    .tw-btn.tw-style1.tw-color1 {
+        background-color: $purple;
+    }
+
+    .tw-btn.tw-style2.tw-color1 {
+        background-color: rgba($purple, 0.1);
+        border-color: $purple;
+        color: $purple;
+    }
+
+    .tw-btn.tw-style2.tw-color1:hover {
+        background-color: $purple;
+    }
+
+    .tw-tagcloud .tw-tag:hover {
+        background-color: $purple;
+    }
+
+    .tw-widget .tw-widget-title:before {
+        background-color: $purple;
+    }
+
+    // Client
+    .tw-member.tw-style1 {
+        .tw-member-meta {
+            background-color: rgba($purple, 0.9);
+        }
+
+        &:hover {
+            .tw-member-meta {
+                background-color: $purple;
+            }
+        }
+    }
+
+    /*Contact*/
+    .tw-form-field input:focus~label,
+    .tw-form-field input:valid~label,
+    .tw-form-field textarea:focus~label,
+    .tw-form-field textarea:valid~label,
+    .tw-form-field select:focus~label,
+    .tw-form-field select:valid~label {
+        background-color: $purple;
+    }
+
+    .tw-contact-form .tw-form-field input:focus,
+    .tw-contact-form .tw-form-field textarea:focus,
+    .tw-contact-form .tw-form-field select:focus,
+    .tw-contact-form .tw-form-field input:valid,
+    .tw-contact-form .tw-form-field textarea:valid {
+        border-color: $purple;
+    }
+
+    .tw-contact-info-list {
+        li {
+            i {
+                color: $purple;
+            }
+
+            a {
+                &:hover {
+                    color: $purple;
+                }
+            }
+        }
+    }
+
+
+    // FunFact
+    .tw-funfact.tw-style1 {
+        .tw-funfact-icon {
+            color: $purple;
+        }
+    }
+
+    // Header
+    @media screen and (min-width: 992px) {
+        .tw-nav {
+            .tw-nav-list {
+                li {
+                    a {
+                        &.active {
+                            color: $purple;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Icon Box
+    .tw-iconbox.tw-style1 {
+        .tw-iconbox-icon {
+            color: $purple;
+            border: 1px solid $purple;
+        }
+
+        &:hover {
+            .tw-iconbox-icon {
+                color: #fff;
+                background-color: $purple;
+            }
+        }
+        &.tw-type1 .tw-iconbox-icon {
+            background-color: $purple;
+            color: #fff;
+        }
+    }
+
+    // Image Box
+    .tw-imagebox.tw-style1 {
+        .tw-imagebox-title {
+            a {
+                &:hover {
+                    color: $purple;
+                }
+            }
+        }
+    }
+
+    // Isotope
+    .tw-isotop-filter.tw-style1 {
+        li {
+
+            a {
+                &:hover {
+                    color: $purple;
+                }
+            }
+
+            &.active {
+                a {
+                    color: $purple;
+                }
+            }
+        }
+    }
+
+    .pagination.tw-style1,
+    .pagination.tw-style2 {
+        li {
+            &.slick-active {
+                background-color: $purple;
+            }
+        }
+    }
+
+    .tw-text-block.tw-style1 {
+        .tw-text-block-subtitle {
+            color: $purple;
+        }
+    }
+
+    .tw-list.tw-style1 li:before {
+        background: $purple;
+    }
+
+    .tw-progressbar-in {
+        background-color: $purple;
+    }
+
+    .tw-progressbar-percentage {
+        color: $purple;
+    }
+
+    .tw-pricing-table.tw-style1 {
+        .tw-price {
+            color: $purple;
+        }
+    }
+
+    .tw-pricing-wrap:hover {
+        .tw-pricing-table:hover {
+            .tw-btn {
+                background-color: $purple;
+                color: #fff;
+            }
+
+            .tw-pricing-head-in {
+                background-color: $purple;
+            }
+
+            .tw-price {
+                color: #fff;
+            }
+
+            .tw-price-per {
+                color: rgba(255, 255, 255, 0.8);
+            }
+        }
+    }
+
+    .tw-post.tw-style2 {
+
+        .tw-post-avatar {
+            .tw-post-avatar-text {
+                background-color: rgba($purple, 0.9);
+                color: #fff;
+            }
+        }
+
+        .tw-post-title {
+            &:hover {
+                a {
+                    color: $purple;
+                }
+            }
+        }
+
+        .tw-post-footer {
+            .tw-post-btn {
+                background-color: $purple;
+                color: #fff;
+
+                &:hover {
+                    color: rgba(255, 255, 255, 0.8);
+                }
+            }
+        }
+    }
+
+    .tw-testimonial.tw-style1 {
+        .tw-quote {
+            color: rgba($purple, 0.1);
+        }
+    }
+
+    .tw-news-letter-form {
+        #subscriber-email {
+            &:focus {
+                border-color: $purple;
+            }
+        }
+    }
+
+    .tw-contact-number {
+        i {
+            color: $purple;
+        }
+
+        .tw-mobile-number {
+            color: $purple;
+        }
+    }
+    .pagination {
+        .page-item {
+            &.active {
+                .page-link {
+                    background-color: $purple;
+                    border-color: $purple;
+                }
+            }
+        }
+    }
+}
+
+.tw-orange {
+
+    // Buttons
+    .tw-btn.tw-style1.tw-color1 {
+        background-color: $orange;
+    }
+
+    .tw-btn.tw-style2.tw-color1 {
+        background-color: rgba($orange, 0.1);
+        border-color: $orange;
+        color: $orange;
+    }
+
+    .tw-btn.tw-style2.tw-color1:hover {
+        background-color: $orange;
+    }
+
+    .tw-tagcloud .tw-tag:hover {
+        background-color: $orange;
+    }
+    .tw-widget .tw-widget-title:before {
+        background-color: $orange;
+    }
+
+    // Client
+    .tw-member.tw-style1 {
+        .tw-member-meta {
+            background-color: rgba($orange, 0.9);
+        }
+
+        &:hover {
+            .tw-member-meta {
+                background-color: $orange;
+            }
+        }
+    }
+
+    /*Contact*/
+    .tw-form-field input:focus~label,
+    .tw-form-field input:valid~label,
+    .tw-form-field textarea:focus~label,
+    .tw-form-field textarea:valid~label,
+    .tw-form-field select:focus~label,
+    .tw-form-field select:valid~label {
+        background-color: $orange;
+    }
+
+    .tw-contact-form .tw-form-field input:focus,
+    .tw-contact-form .tw-form-field textarea:focus,
+    .tw-contact-form .tw-form-field select:focus,
+    .tw-contact-form .tw-form-field input:valid,
+    .tw-contact-form .tw-form-field textarea:valid {
+        border-color: $orange;
+    }
+
+    .tw-contact-info-list {
+        li {
+            i {
+                color: $orange;
+            }
+
+            a {
+                &:hover {
+                    color: $orange;
+                }
+            }
+        }
+    }
+
+    // FunFact
+    .tw-funfact.tw-style1 {
+        .tw-funfact-icon {
+            color: $orange;
+        }
+    }
+
+    // Header
+    @media screen and (min-width: 992px) {
+        .tw-nav {
+            .tw-nav-list {
+                li {
+                    a {
+                        &.active {
+                            color: $orange;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Icon Box
+    .tw-iconbox.tw-style1 {
+        .tw-iconbox-icon {
+            color: $orange;
+            border: 1px solid $orange;
+        }
+
+        &:hover {
+            .tw-iconbox-icon {
+                color: #fff;
+                background-color: $orange;
+            }
+        }
+        &.tw-type1 .tw-iconbox-icon {
+            background-color: $orange;
+            color: #fff;
+        }
+    }
+
+    // Image Box
+    .tw-imagebox.tw-style1 {
+        .tw-imagebox-title {
+            a {
+                &:hover {
+                    color: $orange;
+                }
+            }
+        }
+    }
+
+    // Isotope
+    .tw-isotop-filter.tw-style1 {
+        li {
+
+            a {
+                &:hover {
+                    color: $orange;
+                }
+            }
+
+            &.active {
+                a {
+                    color: $orange;
+                }
+            }
+        }
+    }
+
+    .pagination.tw-style1,
+    .pagination.tw-style2 {
+        li {
+            &.slick-active {
+                background-color: $orange;
+            }
+        }
+    }
+
+    .tw-text-block.tw-style1 {
+        .tw-text-block-subtitle {
+            color: $orange;
+        }
+    }
+
+    .tw-list.tw-style1 li:before {
+        background: $orange;
+    }
+
+    .tw-progressbar-in {
+        background-color: $orange;
+    }
+
+    .tw-progressbar-percentage {
+        color: $orange;
+    }
+
+    .tw-pricing-table.tw-style1 {
+        .tw-price {
+            color: $orange;
+        }
+    }
+
+    .tw-pricing-wrap:hover {
+        .tw-pricing-table:hover {
+            .tw-btn {
+                background-color: $orange;
+                color: #fff;
+            }
+
+            .tw-pricing-head-in {
+                background-color: $orange;
+            }
+
+            .tw-price {
+                color: #fff;
+            }
+
+            .tw-price-per {
+                color: rgba(255, 255, 255, 0.8);
+            }
+        }
+    }
+
+    .tw-post.tw-style2 {
+
+        .tw-post-avatar {
+            .tw-post-avatar-text {
+                background-color: rgba($orange, 0.9);
+                color: #fff;
+            }
+        }
+
+        .tw-post-title {
+            &:hover {
+                a {
+                    color: $orange;
+                }
+            }
+        }
+
+        .tw-post-footer {
+            .tw-post-btn {
+                background-color: $orange;
+                color: #fff;
+
+                &:hover {
+                    color: rgba(255, 255, 255, 0.8);
+                }
+            }
+        }
+    }
+
+    .tw-testimonial.tw-style1 {
+        .tw-quote {
+            color: rgba($orange, 0.1);
+        }
+    }
+
+    .tw-news-letter-form {
+        #subscriber-email {
+            &:focus {
+                border-color: $orange;
+            }
+        }
+    }
+
+    .tw-contact-number {
+        i {
+            color: $orange;
+        }
+
+        .tw-mobile-number {
+            color: $orange;
+        }
+    }
+    .pagination {
+        .page-item {
+            &.active {
+                .page-link {
+                    background-color: $orange;
+                    border-color: $orange;
+                }
+            }
+        }
+    }
+}
+
+.tw-red {
+
+    // Buttons
+    .tw-btn.tw-style1.tw-color1 {
+        background-color: $red;
+    }
+
+    .tw-btn.tw-style2.tw-color1 {
+        background-color: rgba($red, 0.1);
+        border-color: $red;
+        color: $red;
+    }
+
+    .tw-btn.tw-style2.tw-color1:hover {
+        background-color: $red;
+    }
+
+    .tw-tagcloud .tw-tag:hover {
+        background-color: $red;
+    }
+
+    .tw-widget .tw-widget-title:before {
+        background-color: $red;
+    }
+
+    // Client
+    .tw-member.tw-style1 {
+        .tw-member-meta {
+            background-color: rgba($red, 0.9);
+        }
+
+        &:hover {
+            .tw-member-meta {
+                background-color: $red;
+            }
+        }
+    }
+
+    /*Contact*/
+    .tw-form-field input:focus~label,
+    .tw-form-field input:valid~label,
+    .tw-form-field textarea:focus~label,
+    .tw-form-field textarea:valid~label,
+    .tw-form-field select:focus~label,
+    .tw-form-field select:valid~label {
+        background-color: $red;
+    }
+
+    .tw-contact-form .tw-form-field input:focus,
+    .tw-contact-form .tw-form-field textarea:focus,
+    .tw-contact-form .tw-form-field select:focus,
+    .tw-contact-form .tw-form-field input:valid,
+    .tw-contact-form .tw-form-field textarea:valid {
+        border-color: $red;
+    }
+
+    .tw-contact-info-list {
+        li {
+            i {
+                color: $red;
+            }
+
+            a {
+                &:hover {
+                    color: $red;
+                }
+            }
+        }
+    }
+
+    // FunFact
+    .tw-funfact.tw-style1 {
+        .tw-funfact-icon {
+            color: $red;
+        }
+    }
+
+    // Header
+    @media screen and (min-width: 992px) {
+        .tw-nav {
+            .tw-nav-list {
+                li {
+                    a {
+                        &.active {
+                            color: $red;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Icon Box
+    .tw-iconbox.tw-style1 {
+        .tw-iconbox-icon {
+            color: $red;
+            border: 1px solid $red;
+        }
+
+        &:hover {
+            .tw-iconbox-icon {
+                color: #fff;
+                background-color: $red;
+            }
+        }
+        &.tw-type1 .tw-iconbox-icon {
+            background-color: $red;
+            color: #fff;
+        }
+    }
+
+    // Image Box
+    .tw-imagebox.tw-style1 {
+        .tw-imagebox-title {
+            a {
+                &:hover {
+                    color: $red;
+                }
+            }
+        }
+    }
+
+    // Isotope
+    .tw-isotop-filter.tw-style1 {
+        li {
+
+            a {
+                &:hover {
+                    color: $red;
+                }
+            }
+
+            &.active {
+                a {
+                    color: $red;
+                }
+            }
+        }
+    }
+
+    .pagination.tw-style1,
+    .pagination.tw-style2 {
+        li {
+            &.slick-active {
+                background-color: $red;
+            }
+        }
+    }
+
+    .tw-text-block.tw-style1 {
+        .tw-text-block-subtitle {
+            color: $red;
+        }
+    }
+
+    .tw-list.tw-style1 li:before {
+        background: $red;
+    }
+
+    .tw-progressbar-in {
+        background-color: $red;
+    }
+
+    .tw-progressbar-percentage {
+        color: $red;
+    }
+
+    .tw-pricing-table.tw-style1 {
+        .tw-price {
+            color: $red;
+        }
+    }
+
+    .tw-pricing-wrap:hover {
+        .tw-pricing-table:hover {
+            .tw-btn {
+                background-color: $red;
+                color: #fff;
+            }
+
+            .tw-pricing-head-in {
+                background-color: $red;
+            }
+
+            .tw-price {
+                color: #fff;
+            }
+
+            .tw-price-per {
+                color: rgba(255, 255, 255, 0.8);
+            }
+        }
+    }
+
+    .tw-post.tw-style2 {
+
+        .tw-post-avatar {
+            .tw-post-avatar-text {
+                background-color: rgba($red, 0.9);
+                color: #fff;
+            }
+        }
+
+        .tw-post-title {
+            &:hover {
+                a {
+                    color: $red;
+                }
+            }
+        }
+
+        .tw-post-footer {
+            .tw-post-btn {
+                background-color: $red;
+                color: #fff;
+
+                &:hover {
+                    color: rgba(255, 255, 255, 0.8);
+                }
+            }
+        }
+    }
+
+    .tw-testimonial.tw-style1 {
+        .tw-quote {
+            color: rgba($red, 0.1);
+        }
+    }
+
+    .tw-news-letter-form {
+        #subscriber-email {
+            &:focus {
+                border-color: $red;
+            }
+        }
+    }
+
+    .tw-contact-number {
+        i {
+            color: $red;
+        }
+
+        .tw-mobile-number {
+            color: $red;
+        }
+    }
+    .pagination {
+        .page-item {
+            &.active {
+                .page-link {
+                    background-color: $red;
+                    border-color: $red;
+                }
+            }
+        }
+    }
+}
+
+.tw-teal {
+
+    // Buttons
+    .tw-btn.tw-style1.tw-color1 {
+        background-color: $teal;
+    }
+
+    .tw-btn.tw-style2.tw-color1 {
+        background-color: rgba($teal, 0.1);
+        border-color: $teal;
+        color: $teal;
+    }
+
+    .tw-btn.tw-style2.tw-color1:hover {
+        background-color: $teal;
+    }
+
+    .tw-tagcloud .tw-tag:hover {
+        background-color: $teal;
+    }
+
+    .tw-widget .tw-widget-title:before {
+        background-color: $teal;
+    }
+
+    // Client
+    .tw-member.tw-style1 {
+        .tw-member-meta {
+            background-color: rgba($teal, 0.9);
+        }
+
+        &:hover {
+            .tw-member-meta {
+                background-color: $teal;
+            }
+        }
+    }
+
+    /*Contact*/
+    .tw-form-field input:focus~label,
+    .tw-form-field input:valid~label,
+    .tw-form-field textarea:focus~label,
+    .tw-form-field textarea:valid~label,
+    .tw-form-field select:focus~label,
+    .tw-form-field select:valid~label {
+        background-color: $teal;
+    }
+
+    .tw-contact-form .tw-form-field input:focus,
+    .tw-contact-form .tw-form-field textarea:focus,
+    .tw-contact-form .tw-form-field select:focus,
+    .tw-contact-form .tw-form-field input:valid,
+    .tw-contact-form .tw-form-field textarea:valid {
+        border-color: $teal;
+    }
+
+    .tw-contact-info-list {
+        li {
+            i {
+                color: $teal;
+            }
+
+            a {
+                &:hover {
+                    color: $teal;
+                }
+            }
+        }
+    }
+
+    // FunFact
+    .tw-funfact.tw-style1 {
+        .tw-funfact-icon {
+            color: $teal;
+        }
+    }
+
+    // Header
+    @media screen and (min-width: 992px) {
+        .tw-nav {
+            .tw-nav-list {
+                li {
+                    a {
+                        &.active {
+                            color: $teal;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Icon Box
+    .tw-iconbox.tw-style1 {
+        .tw-iconbox-icon {
+            color: $teal;
+            border: 1px solid $teal;
+        }
+
+        &:hover {
+            .tw-iconbox-icon {
+                color: #fff;
+                background-color: $teal;
+            }
+        }
+        &.tw-type1 .tw-iconbox-icon {
+            background-color: $teal;
+            color: #fff;
+        }
+    }
+
+    // Image Box
+    .tw-imagebox.tw-style1 {
+        .tw-imagebox-title {
+            a {
+                &:hover {
+                    color: $teal;
+                }
+            }
+        }
+    }
+
+    // Isotope
+    .tw-isotop-filter.tw-style1 {
+        li {
+
+            a {
+                &:hover {
+                    color: $teal;
+                }
+            }
+
+            &.active {
+                a {
+                    color: $teal;
+                }
+            }
+        }
+    }
+
+    .pagination.tw-style1,
+    .pagination.tw-style2 {
+        li {
+            &.slick-active {
+                background-color: $teal;
+            }
+        }
+    }
+
+    .tw-text-block.tw-style1 {
+        .tw-text-block-subtitle {
+            color: $teal;
+        }
+    }
+
+    .tw-list.tw-style1 li:before {
+        background: $teal;
+    }
+
+    .tw-progressbar-in {
+        background-color: $teal;
+    }
+
+    .tw-progressbar-percentage {
+        color: $teal;
+    }
+
+    .tw-pricing-table.tw-style1 {
+        .tw-price {
+            color: $teal;
+        }
+    }
+
+    .tw-pricing-wrap:hover {
+        .tw-pricing-table:hover {
+            .tw-btn {
+                background-color: $teal;
+                color: #fff;
+            }
+
+            .tw-pricing-head-in {
+                background-color: $teal;
+            }
+
+            .tw-price {
+                color: #fff;
+            }
+
+            .tw-price-per {
+                color: rgba(255, 255, 255, 0.8);
+            }
+        }
+    }
+
+    .tw-post.tw-style2 {
+
+        .tw-post-avatar {
+            .tw-post-avatar-text {
+                background-color: rgba($teal, 0.9);
+                color: #fff;
+            }
+        }
+
+        .tw-post-title {
+            &:hover {
+                a {
+                    color: $teal;
+                }
+            }
+        }
+
+        .tw-post-footer {
+            .tw-post-btn {
+                background-color: $teal;
+                color: #fff;
+
+                &:hover {
+                    color: rgba(255, 255, 255, 0.8);
+                }
+            }
+        }
+    }
+
+    .tw-testimonial.tw-style1 {
+        .tw-quote {
+            color: rgba($teal, 0.1);
+        }
+    }
+
+    .tw-news-letter-form {
+        #subscriber-email {
+            &:focus {
+                border-color: $teal;
+            }
+        }
+    }
+
+    .tw-contact-number {
+        i {
+            color: $teal;
+        }
+
+        .tw-mobile-number {
+            color: $teal;
+        }
+    }
+    .pagination {
+        .page-item {
+            &.active {
+                .page-link {
+                    background-color: $teal;
+                    border-color: $teal;
+                }
+            }
+        }
+    }
+}
+
+.tw-yellow {
+
+    // Buttons
+    .tw-btn.tw-style1.tw-color1 {
+        background-color: $yellow;
+    }
+
+    .tw-btn.tw-style2.tw-color1 {
+        background-color: rgba($yellow, 0.1);
+        border-color: $yellow;
+        color: $yellow;
+    }
+
+    .tw-btn.tw-style2.tw-color1:hover {
+        background-color: $yellow;
+    }
+
+    .tw-tagcloud .tw-tag:hover {
+        background-color: $yellow;
+    }
+
+    .tw-widget .tw-widget-title:before {
+        background-color: $yellow;
+    }
+
+    // Client
+    .tw-member.tw-style1 {
+        .tw-member-meta {
+            background-color: rgba($yellow, 0.9);
+        }
+
+        &:hover {
+            .tw-member-meta {
+                background-color: $yellow;
+            }
+        }
+    }
+
+    /*Contact*/
+    .tw-form-field input:focus~label,
+    .tw-form-field input:valid~label,
+    .tw-form-field textarea:focus~label,
+    .tw-form-field textarea:valid~label,
+    .tw-form-field select:focus~label,
+    .tw-form-field select:valid~label {
+        background-color: $yellow;
+    }
+
+    .tw-contact-form .tw-form-field input:focus,
+    .tw-contact-form .tw-form-field textarea:focus,
+    .tw-contact-form .tw-form-field select:focus,
+    .tw-contact-form .tw-form-field input:valid,
+    .tw-contact-form .tw-form-field textarea:valid {
+        border-color: $yellow;
+    }
+
+    .tw-contact-info-list {
+        li {
+            i {
+                color: $yellow;
+            }
+
+            a {
+                &:hover {
+                    color: $yellow;
+                }
+            }
+        }
+    }
+
+    // FunFact
+    .tw-funfact.tw-style1 {
+        .tw-funfact-icon {
+            color: $yellow;
+        }
+    }
+
+    // Header
+    @media screen and (min-width: 992px) {
+        .tw-nav {
+            .tw-nav-list {
+                li {
+                    a {
+                        &.active {
+                            color: $yellow;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Icon Box
+    .tw-iconbox.tw-style1 {
+        .tw-iconbox-icon {
+            color: $yellow;
+            border: 1px solid $yellow;
+        }
+
+        &:hover {
+            .tw-iconbox-icon {
+                color: #fff;
+                background-color: $yellow;
+            }
+        }
+
+        &.tw-type1 .tw-iconbox-icon {
+            background-color: $yellow;
+            color: #fff;
+        }
+    }
+
+    // Image Box
+    .tw-imagebox.tw-style1 {
+        .tw-imagebox-title {
+            a {
+                &:hover {
+                    color: $yellow;
+                }
+            }
+        }
+    }
+
+    // Isotope
+    .tw-isotop-filter.tw-style1 {
+        li {
+
+            a {
+                &:hover {
+                    color: $yellow;
+                }
+            }
+
+            &.active {
+                a {
+                    color: $yellow;
+                }
+            }
+        }
+    }
+
+    .pagination.tw-style1,
+    .pagination.tw-style2 {
+        li {
+            &.slick-active {
+                background-color: $yellow;
+            }
+        }
+    }
+
+    .tw-text-block.tw-style1 {
+        .tw-text-block-subtitle {
+            color: $yellow;
+        }
+    }
+
+    .tw-list.tw-style1 li:before {
+        background: $yellow;
+    }
+
+    .tw-progressbar-in {
+        background-color: $yellow;
+    }
+
+    .tw-progressbar-percentage {
+        color: $yellow;
+    }
+
+    .tw-pricing-table.tw-style1 {
+        .tw-price {
+            color: $yellow;
+        }
+    }
+
+    .tw-pricing-wrap:hover {
+        .tw-pricing-table:hover {
+            .tw-btn {
+                background-color: $yellow;
+                color: #fff;
+            }
+
+            .tw-pricing-head-in {
+                background-color: $yellow;
+            }
+
+            .tw-price {
+                color: #fff;
+            }
+
+            .tw-price-per {
+                color: rgba(255, 255, 255, 0.8);
+            }
+        }
+    }
+
+    .tw-post.tw-style2 {
+
+        .tw-post-avatar {
+            .tw-post-avatar-text {
+                background-color: rgba($yellow, 0.9);
+                color: #fff;
+            }
+        }
+
+        .tw-post-title {
+            &:hover {
+                a {
+                    color: $yellow;
+                }
+            }
+        }
+
+        .tw-post-footer {
+            .tw-post-btn {
+                background-color: $yellow;
+                color: #fff;
+
+                &:hover {
+                    color: rgba(255, 255, 255, 0.8);
+                }
+            }
+        }
+    }
+
+    .tw-testimonial.tw-style1 {
+        .tw-quote {
+            color: rgba($yellow, 0.1);
+        }
+    }
+
+    .tw-news-letter-form {
+        #subscriber-email {
+            &:focus {
+                border-color: $yellow;
+            }
+        }
+    }
+
+    .tw-contact-number {
+        i {
+            color: $yellow;
+        }
+
+        .tw-mobile-number {
+            color: $yellow;
+        }
+    }
+    .pagination {
+        .page-item {
+            &.active {
+                .page-link {
+                    background-color: $yellow;
+                    border-color: $yellow;
+                }
+            }
+        }
+    }
+}

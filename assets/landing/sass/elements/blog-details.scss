@@ -1,0 +1,340 @@
+.tw-page-heading {
+  height: 650px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-top: 120px;
+  background-size: cover;
+  background-attachment: fixed;
+  &.tw-size-md {
+    height: 450px;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  >div {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.tw-page-heading-title {
+  color: #fff;
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 7px;
+}
+
+.tw-breadcamp {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+
+  li {
+    color: rgba(255, 255, 255, .7);
+    list-style: none;
+
+    &:not(:last-child):after {
+      content: '/';
+      padding-right: 6px;
+      margin-left: 6px;
+    }
+  }
+
+  a {
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+.tw-widget {
+  border: 1px solid $base-color4;
+  border-radius: 4px;
+  padding: 30px;
+
+  .tw-widget-title {
+    font-size: 16px;
+    position: relative;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    margin-top: -3px;
+
+    &:before {
+      content: '';
+      background-color: $green;
+      position: absolute;
+      left: 0;
+      bottom: 0px;
+      height: 2px;
+      width: 100px;
+    }
+  }
+
+
+}
+
+.tw-widget-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  margin-top: -16px;
+  margin-bottom: -16px;
+
+  li:not(:last-child) {
+    border-bottom: 1px solid $base-color4;
+  }
+
+  a {
+    display: block;
+    padding: 10px 0;
+
+    &:hover {
+      color: $green;
+    }
+  }
+}
+
+.tw-tagcloud {
+  margin-bottom: -10px;
+
+  .tw-tag {
+    display: inline-block;
+    font-size: 14px;
+    padding: 2px 10px;
+    border: 1px solid $base-color4;
+    border-radius: 4px;
+    margin-right: 6px;
+    margin-bottom: 10px;
+
+    &:hover {
+      color: #fff;
+      background-color: $green;
+      border-color: $green
+    }
+  }
+}
+
+.tw-post-details.tw-style1 {
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.8em;
+  .slick-slide {
+    line-height: 0;
+  }
+  .tw-post-thumb {
+    margin-bottom: 25px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .tw-post-title {
+    font-size: 28px;
+    margin-bottom: 9px;
+  }
+
+  blockquote {
+    background-color: $base-color5;
+    margin: 0;
+    padding: 30px 40px 27px;
+    font-size: 24px;
+    line-height: 1.6em;
+    border-left: 5px solid $green;
+    color: $base-color1;
+    border-radius: 4px;
+    font-weight: 400;
+    margin: 20px 0;
+
+    small {
+      display: block;
+      line-height: inherit;
+      margin-top: 4px;
+      color: $base-color3;
+      font-size: inherit;
+      font-size: 16px;
+
+      span {
+        color: $green;
+      }
+    }
+  }
+
+  .tw-post-label {
+    margin-bottom: 15px;
+  }
+
+  .tw-post-text p {
+    margin-bottom: 15px;
+  }
+
+  .tw-post-meta {
+    display: flex;
+    justify-content: space-between;
+    padding: 23px 0;
+    border-top: 1px solid $base-color4;
+    border-bottom: 1px solid $base-color4;
+  }
+
+  h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin-bottom: 15px;
+  }
+
+  img {
+    margin-bottom: 20px;
+    border-radius: 4px;
+    margin-top: 5px
+  }
+  .embed-responsive {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+}
+
+.tw-post-label {
+  >span {
+    display: inline-block;
+    position: relative;
+
+    &:not(:last-child) {
+      padding-right: 15px;
+      margin-right: 15px;
+
+      &:before {
+        content: '';
+        position: absolute;
+        height: 16px;
+        width: 1px;
+        background-color: $base-color3;
+        right: 0;
+        top: 3px;
+      }
+    }
+  }
+
+  a:hover {
+    color: $green;
+  }
+}
+
+.tw-post-tage-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  li {
+    margin-right: 5px;
+
+    &:not(:last-child):after {
+      content: ',';
+    }
+
+    a {
+      &:hover {
+        color: $green;
+      }
+    }
+  }
+}
+
+.tw-post-tages,
+.tw-post-share {
+  display: flex;
+  align-items: center;
+
+  .tw-post-tage-title,
+  .tw-post-share-title {
+    margin: 0;
+    font-size: 16px;
+    margin-right: 10px;
+    line-height: 1.4em;
+  }
+}
+
+.tw-post-share-btn-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  a {
+    &:not(:last-child) {
+      margin-right: 12px;
+    }
+
+    &:hover {
+      color: $green;
+    }
+  }
+}
+
+.tw-post-btn-gropu {
+  display: flex;
+  justify-content: space-between;
+
+  .tw-btn {
+    min-width: 170px;
+    justify-content: center;
+  }
+}
+
+.tw-page-heading-in {
+  .tw-post-label {
+    color: rgba(255, 255, 255, 0.75);
+    display: flex;
+    justify-content: center;
+    margin-top: 6px;
+  }
+
+  .tw-post-label>span:not(:last-child):before {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .tw-post-label>span:not(:last-child) {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .tw-post-label a:hover {
+    color: #fff;
+  }
+}
+.tw-page-heading-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+  font-weight: 300;
+  margin-top: 7px;
+}
+@media screen and (max-width: 991px) {
+.tw-page-heading-title {
+    font-size: 38px;
+}
+.tw-page-heading-subtitle {
+    font-size: 16px;
+}
+.tw-page-heading.tw-size-md {
+    height: 350px;
+    padding-top: 80px;
+}
+.tw-page-heading-title br {
+  display: none;
+}
+.tw-page-heading {
+    height: 500px;
+    padding-top: 80px;
+}
+}

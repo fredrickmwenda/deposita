@@ -1,0 +1,274 @@
+/*--------------------------------------------------------------
+## Isotope
+--------------------------------------------------------------*/
+.tw-isotop {
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.tw-isotop.tw-has-gutter {
+  margin-left: -15px;
+  margin-right: -15px;
+  margin-bottom: -30px;
+}
+
+.tw-isotop.tw-has-gutter .tw-isotop-item {
+  padding: 0 15px;
+  margin-bottom: 30px;
+}
+
+.tw-port-col-6 .tw-grid-sizer,
+.tw-port-col-6 .tw-isotop-item {
+  width: 16.666667%;
+}
+
+.tw-port-col-5 .tw-grid-sizer,
+.tw-port-col-5 .tw-isotop-item {
+  width: 20%;
+}
+
+.tw-port-col-4 .tw-grid-sizer,
+.tw-port-col-4 .tw-isotop-item {
+  width: 25%;
+}
+
+.tw-port-col-3 .tw-grid-sizer,
+.tw-port-col-3 .tw-isotop-item {
+  width: 33.333333%;
+}
+
+.tw-port-col-2 .tw-grid-sizer,
+.tw-port-col-2 .tw-isotop-item {
+  width: 50%;
+}
+
+.tw-port-col-1 .tw-grid-sizer,
+.tw-port-col-1 .tw-isotop-item {
+  width: 100%;
+}
+
+.tw-grid-sizer {
+  width: 33.333333%;
+}
+
+.tw-port-col-5 .tw-w20,
+.tw-port-col-4 .tw-w20,
+.tw-port-col-3 .tw-w20,
+.tw-port-col-2 .tw-w20,
+.tw-port-col-1 .tw-w20 {
+  width: 20%;
+}
+
+.tw-port-col-5 .tw-w25,
+.tw-port-col-4 .tw-w25,
+.tw-port-col-3 .tw-w25,
+.tw-port-col-2 .tw-w25,
+.tw-port-col-1 .tw-w25 {
+  width: 25%;
+}
+
+.tw-port-col-5 .tw-w33,
+.tw-port-col-4 .tw-w33,
+.tw-port-col-3 .tw-w33,
+.tw-port-col-2 .tw-w33,
+.tw-port-col-1 .tw-w33 {
+  width: 33.333333%;
+}
+
+.tw-port-col-5 .tw-w50,
+.tw-port-col-4 .tw-w50,
+.tw-port-col-3 .tw-w50,
+.tw-port-col-2 .tw-w50,
+.tw-port-col-1 .tw-w50 {
+  width: 50%;
+}
+
+.tw-port-col-5 .tw-w66,
+.tw-port-col-4 .tw-w66,
+.tw-port-col-3 .tw-w66,
+.tw-port-col-2 .tw-w66,
+.tw-port-col-1 .tw-w66 {
+  width: 66.666666%;
+}
+
+.tw-port-col-5 .tw-w100,
+.tw-port-col-4 .tw-w100,
+.tw-port-col-3 .tw-w100,
+.tw-port-col-2 .tw-w100,
+.tw-port-col-1 .tw-w100 {
+  width: 100%;
+}
+
+@media screen and (max-width: 991px) {
+
+  .tw-port-col-4 .tw-grid-sizer,
+  .tw-port-col-4 .tw-isotop-item {
+    width: 50%;
+  }
+
+  .tw-port-col-4 .tw-w50 {
+    width: 100%;
+  }
+
+  .tw-port-col-3 .tw-grid-sizer,
+  .tw-port-col-3 .tw-isotop-item {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  .tw-port-col-5 .tw-w50,
+  .tw-port-col-4 .tw-w50,
+  .tw-port-col-3 .tw-w50,
+  .tw-port-col-2 .tw-w50,
+  .tw-port-col-1 .tw-w50,
+  .tw-port-col-5 .tw-w66,
+  .tw-port-col-4 .tw-w66,
+  .tw-port-col-3 .tw-w66,
+  .tw-port-col-2 .tw-w66,
+  .tw-port-col-1 .tw-w66 {
+    width: 100%;
+  }
+
+  .tw-port-col-5 .tw-grid-sizer,
+  .tw-port-col-5 .tw-isotop-item {
+    width: 100%;
+  }
+
+  .tw-port-col-4 .tw-grid-sizer,
+  .tw-port-col-4 .tw-isotop-item {
+    width: 100%;
+  }
+
+  .tw-port-col-3 .tw-grid-sizer,
+  .tw-port-col-3 .tw-isotop-item {
+    width: 100%;
+  }
+
+  .tw-port-col-2 .tw-grid-sizer,
+  .tw-port-col-2 .tw-isotop-item {
+    width: 100%;
+  }
+}
+
+/*Isotop Menu Style1*/
+.tw-isotop-filter.tw-style1 {
+  margin-bottom: 30px;
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  li {
+
+    a {
+      padding: 7px 30px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      font-size: 14px;
+      display: inline-block;
+      text-transform: uppercase;
+      font-weight: 500;
+      &:hover {
+        color: $green;
+      }
+    }
+    &.active {
+      a {
+        background-color: $base-color5;
+        color: $green;
+      }
+    }
+  }
+}
+.tw-project {
+  display: block;
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    transition: all 0.4s ease;
+    opacity: 0;
+    z-index: 1;
+  }
+  &:hover {
+    &:before {
+      opacity: 1;
+    }
+  }
+}
+.tw-plus {
+  position: absolute;
+  height: 52px;
+  width: 52px;
+  transition: all 0.4s ease;
+  top: 50%;
+  z-index: 2;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.tw-plus:before, .tw-plus:after, .tw-plus span:before, .tw-plus span:after {
+  content: '';
+  width: 50%;
+  height: 2px;
+  background-color: #fff;
+  position: absolute;
+  transition: all 0.4s ease;
+  opacity: 0;
+}
+.tw-plus:before {
+  left: -20px;
+  top: 50%;
+}
+.tw-plus:after {
+  right: -20px;
+  top: 50%;
+}
+.tw-plus span {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+.tw-plus span:before {
+  transform: rotate(90deg);
+  top: 25%;
+  left: 25%;
+  margin-top: -20px;
+}
+.tw-plus span:after {
+  transform: rotate(90deg);
+  bottom: 25%;
+  left: 25%;
+  margin-bottom: -20px;
+}
+.tw-project:hover .tw-plus:before {
+  left: 0;
+  opacity: 1;
+}
+.tw-project:hover .tw-plus:after {
+  opacity: 1;
+  right: 0;
+}
+.tw-project:hover .tw-plus span:before {
+  opacity: 1;
+  margin-top: 0;
+}
+.tw-project:hover .tw-plus span:after {
+  opacity: 1;
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 575px) {
+.tw-isotop-filter.tw-style1 li a {
+    padding: 7px 15px;
+    font-size: 13px;
+}
+}
