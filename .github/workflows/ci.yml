@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - '**'
+      - '!master'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Get changed files
+      id: getfile
+      run: |
+        echo "::set-output name=files::$(git diff --name-only HEAD^ HEAD)"
+
+    - name: Run tests
+      run: |
+        echo "Running tests..."
+        # Assuming you have a script that takes a list of files and runs tests on them
+        ./run_tests.sh ${{ steps.getfile.outputs.files }}
+
+    - name: Deploy
+      run: |
+        echo "Deploying..."
+        # Add commands to deploy your application here.
