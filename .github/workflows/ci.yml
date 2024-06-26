@@ -25,7 +25,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v3  # Updated to v3
 
     - name: Set up PHP
       uses: shivammathur/setup-php@v2
@@ -33,7 +33,12 @@ jobs:
         php-version: '8.1'
 
     - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
+      run: |
+        if [ -f composer.lock ]; then
+          composer install --prefer-dist --no-progress
+        else
+          composer update --prefer-dist --no-progress
+        fi
 
     - name: Copy .env
       run: cp .env.example .env
@@ -77,8 +82,6 @@ jobs:
           exit 1
         fi
 
-
-
         # Check for changes in configuration files
         if echo "$CHANGED_FILES" | grep -q "^config/"; then
           echo "Changes to config files detected. Aborting..."
@@ -117,7 +120,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v3  # Updated to v3
 
     - name: Deploy to production
       run: |
