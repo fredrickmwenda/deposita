@@ -24,7 +24,7 @@ Route::get('/', function () {
     // return redirect()->route('storage.index');
 
 });
-
+//Maroutes
 Route::group(['middleware' => ['auth', 'web']], function () {
     Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
     Route::get('/user/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('user.logout');

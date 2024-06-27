@@ -1,0 +1,128 @@
+name: CI/CD Pipeline
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: laravel
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3  # Updated to v3
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+
+    - name: Install dependencies
+      run: |
+        if [ -f composer.lock ]; then
+          composer install --prefer-dist --no-progress
+        else
+          composer update --prefer-dist --no-progress
+        fi
+
+    - name: Copy .env
+      run: cp .env.example .env
+
+    - name: Generate application key
+      run: php artisan key:generate
+
+    - name: Run migrations
+      run: php artisan migrate --no-interaction --env=testing
+
+    - name: Run tests
+      run: php artisan test
+
+    - name: Check changed files
+      id: file_changes
+      run: |
+        CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+        echo "Changed files: $CHANGED_FILES"
+        echo "::set-output name=files::$CHANGED_FILES"
+
+    - name: Enforce file change rules
+      run: |
+        CHANGED_FILES=${{ steps.file_changes.outputs.files }}
+        
+        # Add your custom file check logic here for all folders in the Laravel project
+        
+        # Check for changes in .env file
+        if echo "$CHANGED_FILES" | grep -q ".env"; then
+          echo "Changes to .env file detected. Aborting..."
+          exit 1
+        fi
+        
+        # Check for changes in app folder
+        if echo "$CHANGED_FILES" | grep -q "^Models/"; then
+          echo "Changes to Model files detected. Aborting..."
+          exit 1
+        fi
+
+        if echo "$CHANGED_FILES" | grep -q "^Controllers/"; then
+          echo "Changes to Controller files detected. Aborting..."
+          exit 1
+        fi
+
+        # Check for changes in configuration files
+        if echo "$CHANGED_FILES" | grep -q "^config/"; then
+          echo "Changes to config files detected. Aborting..."
+          exit 1
+        fi
+        
+        # Check for changes in migration files
+        if echo "$CHANGED_FILES" | grep -q "^database/migrations/"; then
+          echo "Changes to migration files detected. Aborting..."
+          exit 1
+        fi
+        
+        # Check for changes in routes
+        if echo "$CHANGED_FILES" | grep -q "^routes/"; then
+          echo "Changes to route files detected. Aborting..."
+          exit 1
+        fi
+        
+        # Check for changes in public assets
+        if echo "$CHANGED_FILES" | grep -q "^public/"; then
+          echo "Changes to public assets detected. Aborting..."
+          exit 1
+        fi
+
+        if echo "$CHANGED_FILES" | grep -q "^resources/"; then
+          echo "Changes to Resources files detected. Aborting..."
+          exit 1
+        fi
+        
+        echo "No forbidden file changes detected."
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3  # Updated to v3
+
+    - name: Deploy to production
+      run: |
+        # Add your deployment script here
+        echo "Deploying to production..."
