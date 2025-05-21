@@ -12,13 +12,6 @@
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                     <h4 class="mb-sm-0 font-size-18">Users List</h4>
 
-                    <!-- <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">Users</a></li>
-                            <li class="breadcrumb-item active">Users List</li>
-                        </ol>
-                    </div> -->
-
                 </div>
             </div>
         </div>
@@ -31,12 +24,7 @@
                         <div class="row mb-2">
                             <div class="col-sm-4">
                             <h4 class="card-title">Total Users: {{$users->count()}}</h4>
-                                <!-- <div class="search-box me-2 mb-2 d-inline-block">
-                                    <div class="position-relative">
-                                        <input type="text" class="form-control" placeholder="Search...">
-                                        <i class="bx bx-search-alt search-icon"></i>
-                                    </div>
-                                </div> -->
+                                
                             </div>
                             <div class="col-sm-8">
                                 <div class="text-sm-end">
@@ -44,6 +32,21 @@
                                 </div>
                             </div><!-- end col-->
                         </div>
+
+                        @if(Auth::user()->role == 'provider')
+                        <div class="mb-3">
+                            <h5>Users per Station:</h5>
+                            <ul>
+                                @foreach($stationCounts as $stationId => $count)
+                                    <li>
+                                        <a href="{{ route('users.index', ['station' => $stationId]) }}">
+                                            Station #{{ $stationId }}: {{ $count }} users
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
 
                         <div class="table-responsive">
                             <table class="table align-middle table-nowrap table-check" id="s-datatable">
@@ -59,46 +62,84 @@
                                         <th class="align-middle">Name</th>
                                         <th class="align-middle">Email</th>
                                         <th class="align-middle">Phone</th>
+                                        <th class="align-middle">Role</th>
+                                        <th class="align-middle">Station</th>
+                                        <th class="align-middle">Status</th>
                                         <th class="align-middle">Grant</th>
                                         <th class="align-middle">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        @foreach ($users as $key => $user)
-                                        <td>
-                                            <div class="form-check font-size-16">
-                                                <input class="form-check-input" type="checkbox" id="orderidcheck01">
-                                                <label class="form-check-label" for="orderidcheck01"></label>
-                                            </div>
-                                        </td>
-                                        <!-- <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2540</a> </td> -->
-                                        <td>{{ $key+1 }}</td>
-                                        <td>
-                                            @if ($user->profile_picture)
-                                            <img src="{{asset('assets/images/profile/'.$user->profile_picture) }}" alt="" class="avatar-xs rounded-circle me-2" height="10px" width="10px">
-                                            @else
-                                            <img src="{{ asset('assets/images/users/avatar-2.jpg') }}" alt="" class="avatar-xs rounded-circle me-2" height="10px" width="10px">
-                                            @endif
-                                            <a href="javascript: void(0);" class="text-body fw-bold">{{ $user->name }}</a>       
-                                        </td>
-                                        <td>
-                                            <a href="mailto:{{ $user->email }}" class="text-body fw-bold">{{ $user->email }}</a>
-                                        </td>
-                                        <td>
-                                            <a href="tel:{{ $user->phone }}" class="text-body fw-bold">{{ $user->phone }}</a>
-                                        </td>
-                                        <td>
-                                            {{ $user->grant_role }}
-                                        </td>
+                                    @foreach ($users as $key => $user)
+                                        @if (!request('station') || (isset($user->station_id) && $user->station_id == request('station')))
+                                        <tr>
+                                            <td>
+                                                <div class="form-check font-size-16">
+                                                    <input class="form-check-input" type="checkbox" id="orderidcheck01">
+                                                    <label class="form-check-label" for="orderidcheck01"></label>
+                                                </div>
+                                            </td>
+                                            <!-- <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2540</a> </td> -->
+                                            <td>{{ $key+1 }}</td>
+                                            <td>
+                                                @if ($user->profile_picture)
+                                                <img src="{{asset('assets/images/profile/'.$user->profile_picture) }}" alt="" class="avatar-xs rounded-circle me-2" height="10px" width="10px">
+                                                @else
+                                                <img src="{{ asset('assets/images/users/avatar-2.jpg') }}" alt="" class="avatar-xs rounded-circle me-2" height="10px" width="10px">
+                                                @endif
+                                                <a href="javascript: void(0);" class="text-body fw-bold">{{ $user->name }}</a>       
+                                            </td>
+                                            <td>
+                                                <a href="mailto:{{ $user->email }}" class="text-body fw-bold">{{ $user->email }}</a>
+                                            </td>
+                                            <td>
+                                                <a href="tel:{{ $user->phone }}" class="text-body fw-bold">{{ $user->phone }}</a>
+                                            </td>
+                                            <td>
+                                                @if ($user->role === 'client_user')
+                                                    Client User
+                                                @elseif ($user->role === 'station_admin')
+                                                    Station Admin
+                                                @elseif ($user->role === 'provider_admin')
+                                                    Provider Admin
+                                                @else
+                                                    {{ $user->role }}
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($user->station)
+                                                    {{ $user->station->name }}
+                                                @else
+                                                    N/A
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($user->status === 'active')
+                                                    <span class="badge badge-soft-success font-size-12">Active</span>
+                                                @elseif ($user->status === 'inactive')
+                                                    <span class="badge badge-soft-danger font-size-12">Inactive</span>
+                                                @else
+                                                    {{ $user->status }}
+                                                @endif
+                                            </td>
+                                            <td>
+                                                {{ $user->grant_role }}
+                                            </td>
 
-                                        <td>
-                                            <div class="d-flex gap-3">
-                                                <a href="{{ route('users.edit',$user->id) }}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                <a href="javascript:void(0);" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            <td>
+                                                @if ($user->role === 'client_user' && $user->status === 'inactive' && Auth::user()->role === 'station_admin')
+                                                    <form action="{{ route('users.activate', $user->id) }}" method="POST" style="display:inline-block;">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-sm btn-success">Activate</button>
+                                                    </form>
+                                                @endif
+                                                <div class="d-flex gap-3">
+                                                    <a href="{{ route('users.edit',$user->id) }}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                                    <a href="javascript:void(0);" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endif
                                     @endforeach
 
 

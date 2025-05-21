@@ -15,7 +15,7 @@
     <!--stack css process other css from pages-->
     @stack('css')
 </head>
-<body>
+<body> 
     <div id="layout-wrapper">
         @include('layouts.partials.header')
         @include('layouts.partials.sidebar')

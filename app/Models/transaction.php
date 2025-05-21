@@ -15,6 +15,16 @@ class transaction extends Model
         'expected' => 'float',
     ];
 
+    protected $fillable = [
+        'date',
+        'shift',
+        'expected',
+        'total',
+        'recovery',
+        'attendant_id',
+        'client_id',
+    ];
+
     // transaction belongs to a DataStorage
     public function dataStorage()
     {
@@ -34,5 +44,10 @@ class transaction extends Model
     public function recoveries()
     {
         return $this->hasMany(Recovery::class);
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
     }
 }

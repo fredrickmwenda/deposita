@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'client_id',
+        'role',
+        'status',
+        'station_admin_id',
     ];
 
     /**
@@ -41,4 +45,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function stationAdmin()
+    {
+        return $this->belongsTo(User::class, 'station_admin_id');
+    }
 }

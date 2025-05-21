@@ -108,18 +108,25 @@ class DataStorageController extends Controller
 
     public function shiftList(Request $request)
     {
-
+        $user = auth()->user();
         if ($request->from_date && $request->shift && $request->shift !== 'Select Shift') {
-
-            $transactions = transaction::select('*')->when($request->from_date, function ($query) use ($request) {
-                return $query->whereDate('date', $request->from_date);
-            })->when($request->shift, function ($query) use ($request) {
-                return $query->where('shift', $request->shift);
-            })->get();
+            $transactions = transaction::select('*')
+                ->when($request->from_date, function ($query) use ($request) {
+                    return $query->whereDate('date', $request->from_date);
+                })
+                ->when($request->shift, function ($query) use ($request) {
+                    return $query->where('shift', $request->shift);
+                })
+                ->when($user->role !== 'provider', function ($query) use ($user) {
+                    return $query->where('client_id', $user->client_id);
+                })
+                ->get();
         } else {
-            $transactions = transaction::orderBy('created_at', 'desc')->take(50)->orderBy('id', 'desc')->get();
+            $transactions = transaction::when($user->role !== 'provider', function ($query) use ($user) {
+                    return $query->where('client_id', $user->client_id);
+                })
+                ->orderBy('created_at', 'desc')->take(50)->orderBy('id', 'desc')->get();
         }
-
         return view('data.list', compact('transactions'));
     }
 
@@ -218,17 +225,12 @@ class DataStorageController extends Controller
 
                     $dateTime = \DateTime::createFromFormat('d-m-Y H:i', $importData[2]);
                 }
-                // elseif (preg_match('/^\d{1,2}\/\d{1,2}\/\d{4}\s+\d{1,2}:\d{1,2}$/', $importData[2])) {
-                //     // dd('bare');
-                //     $dateTime = \DateTime::createFromFormat('m/d/Y H:i', $importData[2]);
-                //     dd('bare', $dateTime,  $importData[2]);
-                // }
+
                 else if (preg_match('/^\d{2}\/\d{2}\/\d{4}\s+\d{1,2}:\d{1,2}$/', $importData[2])) {
                     // Format: dd/mm/yyyy hh:mm
 
                     $dateTime = \DateTime::createFromFormat('d/m/Y H:i', $importData[2]);
-                    // dd('bare', $dateTime,  $importData[2]);
-                    // ...
+
                 }
 
 

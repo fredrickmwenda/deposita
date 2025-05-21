@@ -17,8 +17,20 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('users.index', compact('users'));
+        if(Auth::user()->role == 'provider'){
+            $users = User::all();
+            $stationCounts = \App\Models\Station::withCount('users')->pluck('users_count', 'id');
+        }
+        else{
+            $query = User::query();
+            $query->where('client_id', Auth::user()->client_id);
+            if (Auth::user()->role === 'station_admin') {
+                // Optionally, further restrict to only their station's users
+            }
+            $users = $query->get();
+            $stationCounts = collect();
+        }
+        return view('users.index', compact('users', 'stationCounts'));
     }
 
     /**
@@ -39,25 +51,56 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        $this->validate($request, [
+        $loggedInUser = Auth::user();
+        $roleRule = '';
+        $extraRules = [];
+        if ($loggedInUser->role === 'provider') {
+            // Provider can create provider, station_admin, or client_user
+            $roleRule = 'required|in:provider,station_admin,client_user';
+            // If creating a client_user, must be assigned to a station and station_admin
+            if ($request->role === 'client_user') {
+                $extraRules['station_id'] = 'required|exists:stations,id';
+                $extraRules['station_admin_id'] = 'required|exists:users,id';
+            }
+        } elseif ($loggedInUser->role === 'station_admin') {
+            // Station admin can only create client_user
+            $roleRule = 'required|in:client_user';
+            $extraRules['station_id'] = 'required|exists:stations,id';
+            $extraRules['station_admin_id'] = 'required|in:' . $loggedInUser->id;
+        } else {
+            abort(403, 'Unauthorized');
+        }
+
+        $this->validate($request, array_merge([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'grant_role' => 'required',
-            // 'phone' =>  $request->phone != null ? 'unique:users|max:100' : '',
+            'role' => $roleRule,
             'password' => 'required|string|min:6|confirmed',
-        ]);
-
+        ], $extraRules));
 
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->grant_role = $request->grant_role;
-        $user->phone = $request->phone;
+        $user->role = $request->role;
+        $user->status = $request->role === 'client_user' ? 'inactive' : 'active';
         $user->password = Hash::make($request->password);
-        $user->save();
 
-        return redirect()->route('users.index')->with('success', 'User created successfully');
+        if ($request->role === 'provider') {
+            $user->client_id = null;
+            $user->station_admin_id = null;
+        } elseif ($request->role === 'station_admin') {
+            $user->client_id = $request->client_id;
+            $user->station_admin_id = null;
+        } elseif ($request->role === 'client_user') {
+            $station = \App\Models\Station::find($request->station_id);
+            $user->client_id = $station ? $station->client_id : null;
+            $user->station_admin_id = $request->station_admin_id;
+        }
+
+        $user->save();
+        // Send email notification
+        \Mail::to($user->email)->send(new \App\Mail\UserRegistered($user));
+        return redirect()->route('users.index')->with('success', 'User created successfully!');
 
 
 
@@ -189,5 +232,21 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Activate a pending client user (by station admin)
+     */
+    public function activate($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user->role === 'client_user' && $user->status === 'inactive') {
+            $user->status = 'active';
+            $user->save();
+            // Optionally notify the user
+            \Mail::to($user->email)->send(new \App\Mail\UserActivated($user));
+            return redirect()->route('users.index')->with('success', 'User activated successfully!');
+        }
+        return redirect()->route('users.index')->with('error', 'User cannot be activated.');
     }
 }

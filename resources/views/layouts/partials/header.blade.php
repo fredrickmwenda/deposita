@@ -42,6 +42,41 @@
                 </button>
             </div>
 
+                       @php
+                $unreadNotifications = Auth::user()->unreadNotifications ?? collect();
+            @endphp
+            <div class="dropdown d-inline-block">
+                <button type="button" class="btn header-item noti-icon waves-effect" id="notificationDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="mdi mdi-bell-outline"></i>
+                    @if($unreadNotifications->count() > 0)
+                        <span class="badge bg-danger position-absolute top-0 start-100 translate-middle">{{ $unreadNotifications->count() }}</span>
+                    @endif
+                </button>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown" style="min-width: 300px; max-height: 250px; overflow-y: auto;">
+                    <span class="dropdown-header">Notifications</span>
+                    <div style="max-height: 100px; overflow-y: auto;">
+                        @forelse($unreadNotifications as $notification)
+                            <form method="POST" action="{{ route('notifications.read', $notification->id) }}" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="dropdown-item">
+                                    {{ $notification->data['message'] }}<br>
+                                    <small>{{ $notification->data['user_name'] }} ({{ $notification->data['user_email'] }})</small>
+                                </button>
+                            </form>
+                        @empty
+                            <span class="dropdown-item">No new notifications</span>
+                        @endforelse
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center px-2 py-1 border-top" style="background: #f8f9fa;">
+                        <form method="POST" action="{{ route('notifications.markAllRead') }}">
+                            @csrf
+                            <button type="submit" class="btn btn-link p-0 m-0" style="font-size: 13px;">Mark all as read</button>
+                        </form>
+                        <a href="{{ route('notifications.page') }}" class="btn btn-link p-0 m-0" style="font-size: 13px;">View all</a>
+                    </div>
+                </div>
+            </div>
+
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     @if(Auth::user()->profile_picture)
@@ -61,6 +96,8 @@
                     <a class="dropdown-item text-danger" href="{{ route('user.logout') }}"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Logout</span></a>
                 </div>
             </div>
+
+ 
         </div>
     </div>
   </div>

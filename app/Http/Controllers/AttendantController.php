@@ -14,7 +14,11 @@ class AttendantController extends Controller
      */
     public function index()
     {
-        $attendants = Attendant::all();
+        if (auth()->user()->role === 'provider') {
+            $attendants = Attendant::all();
+        } else {
+            $attendants = Attendant::where('client_id', auth()->user()->client_id)->get();
+        }
         return view('attendant.index', compact('attendants'));
     }
 
@@ -43,7 +47,8 @@ class AttendantController extends Controller
 
         Attendant::create([
             'Card_name' => $request->Card_name,
-            'Card_number' => $request->Card_number
+            'Card_number' => $request->Card_number,
+            'client_id' => auth()->user()->client_id
         ]);
         
 
@@ -85,10 +90,12 @@ class AttendantController extends Controller
     {
         $request->validate([
             'Card_name'=>'required',
-            'Card_number'=> 'required|unique:attendants'
+            'Card_number'=> 'required|unique:attendants,Card_number,'.$id
         ]);
 
-        $attendant = Attendant::find($id);
+        $attendant = Attendant::where('id', $id)
+            ->where('client_id', auth()->user()->client_id)
+            ->firstOrFail();
         $attendant->Card_name = $request->Card_name;
         $attendant->Card_number = $request->Card_number;
         $attendant->save();

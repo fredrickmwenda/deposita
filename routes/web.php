@@ -93,6 +93,31 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     Route::get('{attendantId}/differences', [App\Http\Controllers\RecoveryController::class, 'showAttendantDifferences'])->name('show.attendant.differences');
     Route::get('{transactionId}/record', [App\Http\Controllers\RecoveryController::class, 'showAttendantCashierRecord'])->name('show.attendant.record');
 
+    // User activation route for station admins
+    Route::post('/users/{id}/activate', [App\Http\Controllers\UserController::class, 'activate'])->name('users.activate');
+
+    // Station management (provider only)
+    Route::get('stations', [App\Http\Controllers\StationController::class, 'index'])->name('stations.index');
+    Route::get('stations/create', [App\Http\Controllers\StationController::class, 'create'])->name('stations.create');
+    Route::post('stations/store', [App\Http\Controllers\StationController::class, 'store'])->name('stations.store');
+    // Mark notification as read
+    Route::post('notifications/{id}/read', function($id) {
+        $notification = Auth::user()->notifications()->where('id', $id)->first();
+        if ($notification) {
+            $notification->markAsRead();
+        }
+        return back();
+    })->name('notifications.read');
+    // Dedicated notifications page
+    Route::get('notifications', function() {
+        return view('notifications.page');
+    })->name('notifications.page');
+    // Mark all notifications as read
+    Route::post('notifications/mark-all-read', function() {
+        Auth::user()->unreadNotifications->markAsRead();
+        return back();
+    })->name('notifications.markAllRead');
+
 });
 Auth::routes();
 

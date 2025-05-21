@@ -61,6 +61,39 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="station_id" class="col-md-4 col-form-label text-md-end">Station</label>
+                            <div class="col-md-6">
+                                <select id="station_id" name="station_id" class="form-control @error('station_id') is-invalid @enderror" required>
+                                    <option value="">Select Station</option>
+                                    @foreach(App\Models\Station::all() as $station)
+                                        <option value="{{ $station->id }}" {{ old('station_id') == $station->id ? 'selected' : '' }}>{{ $station->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('station_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="station_admin_id" class="col-md-4 col-form-label text-md-end">Station Admin</label>
+                            <div class="col-md-6">
+                                <select id="station_admin_id" name="station_admin_id" class="form-control @error('station_admin_id') is-invalid @enderror" required>
+                                    <option value="">Select Station Admin</option>
+                                    @foreach(App\Models\User::where('role', 'station_admin')->get() as $admin)
+                                        <option value="{{ $admin->id }}" {{ old('station_admin_id') == $admin->id ? 'selected' : '' }}>{{ $admin->name }} ({{ $admin->email }})</option>
+                                    @endforeach
+                                </select>
+                                @error('station_admin_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

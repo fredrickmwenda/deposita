@@ -53,6 +53,9 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'station_id' => ['required', 'exists:stations,id'],
+            'station_admin_id' => ['required', 'exists:users,id'],
+            'client_id' => ['required', 'exists:clients,id'],
         ]);
     }
 
@@ -64,10 +67,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $role = 'client_user';
+        $status = 'inactive';
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => $role,
+            'status' => $status,
+            'station_admin_id' => $data['station_admin_id'],
+            // Save client_id based on the selected station
+            'client_id' => \App\Models\Station::find($data['station_id'])->client_id,
         ]);
+        // Notify the station admin
+        $stationAdmin = \App\Models\User::find($data['station_admin_id']);
+        if ($stationAdmin) {
+            $stationAdmin->notify(new \App\Notifications\NewClientUserRegistered($user));
+        }
+        return $user;
     }
 }
