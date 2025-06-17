@@ -4,6 +4,13 @@
     .dropdown-item {
         white-space: normal !important;
     }
+    .table th {
+    font-size: 10px !important;
+}
+
+.table td.date-cell {
+    font-size: 10px !important;
+}
 </style>
 <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endpush
@@ -100,7 +107,7 @@
                                                 <label class="form-check-label" for="checkAll"></label>
                                             </div>
                                         </th>
-                                        <th class="align-middle">ID</th>
+                                        
                                         <th class="align-middle">Date</th>
                                         <th class="align-middle">Shift</th>
                                         <th class="align-middle">Attendant</th>
@@ -112,7 +119,7 @@
                                         <th class="align-middle">Difference</th>
                                         <th class="align-middle"> Comment </th>
                                         <th class="align-middle">Action </th>
-                                        <!-- <th class="align-middle">Created At</th> -->
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -124,7 +131,7 @@
                                                 <label class="form-check-label" for="orderidcheck{{$transaction->id}}"></label>
                                             </div>
                                         </td>
-                                        <td>{{ $transaction->id }}</td>
+                                        
                                         <td>{{ $transaction->date }}</td>
                                         <td>{{ $transaction->shift }}</td>
                                         <td>

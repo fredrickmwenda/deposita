@@ -13,15 +13,20 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Clear Cache using routing
+Route::get('/optimize', function () {
+    Artisan::call('optimize:clear');
+    return response()->json(['message' => 'Optimization cleared successfully']);
+});
 
 Route::get('/', function () {
      if (Auth::check()) {
         // dd('here');
-        return redirect()->route('storage.index');
+        return redirect()->route('storage.list');
     } else {
         return redirect()->route('login');
     }
-    // return redirect()->route('storage.index');
+   
 
 });
 //Maroutes

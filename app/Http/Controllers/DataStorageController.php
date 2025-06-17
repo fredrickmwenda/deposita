@@ -106,24 +106,28 @@ class DataStorageController extends Controller
         return view('data.create');
     }
 
-    public function shiftList(Request $request)
-    {
 
-        if ($request->from_date && $request->shift && $request->shift !== 'Select Shift') {
 
-            $transactions = transaction::select('*')->when($request->from_date, function ($query) use ($request) {
-                return $query->whereDate('date', $request->from_date);
-            })->when($request->shift, function ($query) use ($request) {
-                return $query->where('shift', $request->shift);
-            })->get();
-        } else {
-            $transactions = transaction::orderBy('created_at', 'desc')->take(50)->orderBy('id', 'desc')->get();
+
+public function shiftList(Request $request)
+{
+    if ($request->from_date) {
+        $query = transaction::select('*')->whereDate('date', $request->from_date);
+        
+        if ($request->shift && $request->shift !== 'Select Shift') {
+            $query->where('shift', $request->shift);
         }
-
-        return view('data.list', compact('transactions'));
+        
+        $transactions = $query->get();
+    } else {
+        $transactions = transaction::orderBy('created_at', 'desc')
+            ->take(50)
+            ->orderBy('id', 'desc')
+            ->get();
     }
 
-
+    return view('data.list', compact('transactions'));
+}
  
 
     // import csv file

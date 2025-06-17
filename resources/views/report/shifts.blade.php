@@ -20,6 +20,15 @@
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+/* Add these new styles */
+.table th {
+    font-size: 10px !important;
+}
+
+.table tr td {
+    font-size: 10px !important;
+}
 </style>
 <!-- <link href="{{ asset('assets/libs/datatables.net/css/jquery.dataTables.min.css') }}" rel="stylesheet"> -->
 <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
@@ -103,10 +112,13 @@
                         <table class="table align-middle table-nowrap table-check" id="transact-form"> 
                             <thead class="table-light">
                                 <tr>
-                                <th class="align-middle">ID</th>
+                                
                                 <th class="align-middle">Date</th>
                                 <th class="align-middle">Attendant </th>
                                 <th class="align-middle">Total Drop</th>
+                                <th class="align-middle">Cash</th>
+                                <th class="align-middle">Coins</th>
+                                <th class="align-middle">Recovery</th>
                                 <th class="align-middle">Expected</th>
                                 <th class="align-middle">Short/Gain</th>
                                 <th class="align-middle">Comment</th>
@@ -115,10 +127,13 @@
                             <tbody>
                                 @foreach ($transactions as $transaction)
                                 <tr>
-                                    <td>{{ $transaction->id }}</td>
+                                    
                                     <td>{{ $transaction->date }}</td>
                                     <td>{{ $transaction->attendant->Card_name }}</td>
                                     <td>{{number_format(floatval($transaction->total) + floatval($transaction->coins) + floatval($transaction->cash) + floatval($transaction->recoveries->sum('recovery_amount'))) }}</td>
+                                    <td>{{number_format(floatval($transaction->cash) ) }}</td>
+                                    <td>{{number_format( floatval($transaction->coins) ) }}</td>
+                                    <td>{{number_format( floatval($transaction->recoveries->sum('recovery_amount')) ) }}</td>
                                     <!-- <td>{{number_format(floatval($transaction->total) + floatval($transaction->coins()->sum('coin_amount')) + floatval($transaction->recoveries->sum('recovery_amount'))) }}</td> -->
                                     <td>{{ number_format((float)$transaction->expected) }}</td>
                                     <td style="background-color: {{ $transaction->difference < 0 ? 'red' : 'green' }}; color: white;">    
@@ -162,6 +177,8 @@
                                     <td  class="text-end"><strong>Deposita Total</strong></td>
                                     <td><b>{{number_format($total_drop)}}</b> </td>
                                     <td><b>{{number_format($total_expected)}}</b></td>
+                                    <td></td> 
+                                    <td></td>
                                     <td style="background-color: {{ $total_difference < 0 ? 'red' : 'green' }}; color: white;">    
                                         <b>
                                             @if ($total_difference < 0)
@@ -190,6 +207,15 @@
                                     <td></td>
                                     <td class="text-end"><strong>Coin Total</strong></td>
                                     <td>{{ number_format($total_coins)}}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                    <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-end"><strong>Recovery Total</strong></td>
+                                    <td>{{ number_format($total_recovery)}}</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

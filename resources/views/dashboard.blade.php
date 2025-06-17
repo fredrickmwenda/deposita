@@ -263,6 +263,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Function to handle filtering and getting short/gain for the selected year
     function filterAndGetData(selectedYear) {
+            // Update dropdown toggle text
+    document.getElementById("yearDropdown").innerHTML = selectedYear + 
+        ' <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>';
+
+        // Hide the dropdown menu
+    document.getElementById("yearDropdownMenu").classList.remove("show");
+
         // Make an AJAX request to the server to fetch short/gain data for the selected year
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {

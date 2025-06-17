@@ -22,6 +22,9 @@
                                       <th class="align-middle">Date</th>
                                       <th class="align-middle">Attendant </th>
                                       <th class="align-middle">Total Drop</th>
+                                      <th class="align-middle">Cash</th>
+                                      <th class="align-middle">Coins</th>
+                                      <th class="align-middle">Recovery</th>
                                       <th class="align-middle">Expected</th>
                                       <th class="align-middle">Short/Gain</th>
                                       <th class="align-middle">Comment</th>
@@ -33,6 +36,9 @@
                                     <td>{{ $transaction->date }}</td>
                                     <td>{{ $transaction->attendant_name}}</td>
                                     <td>{{number_format(floatval($transaction->total) + floatval($transaction->coins) + floatval($transaction->cash) + floatval($transaction->recovery)) }}</td>
+                                    <td>{{number_format(floatval($transaction->cash) ) }}</td>
+                                    <td>{{number_format( floatval($transaction->coins) ) }}</td>
+                                    <td>{{number_format( floatval($transaction->recoveries->sum('recovery_amount')) ) }}</td>
                                     <td>{{ number_format((float)$transaction->expected) }}</td>
                                     <td style="background-color: {{ $transaction->difference < 0 ? 'red' : 'green' }}; color: white;">    
                                         @if ($transaction->difference < 0)

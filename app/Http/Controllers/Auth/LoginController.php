@@ -33,7 +33,7 @@ class LoginController extends Controller
     public function redirectTo()
     { 
         // dd('here');
-        return route('storage.index');
+        return route('storage.list');
 
  
     }
