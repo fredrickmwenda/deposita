@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\ShortGainStatsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,9 @@ Route::get('/optimize', function () {
     Artisan::call('optimize:clear');
     return response()->json(['message' => 'Optimization cleared successfully']);
 });
+
+// Short/Gain Statistics API endpoint
+Route::get('/api/short-gain-stats', [ShortGainStatsController::class, 'getStats'])->name('api.short-gain-stats');
 
 Route::get('/', function () {
      if (Auth::check()) {
@@ -97,6 +102,8 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     Route::get('differences', [App\Http\Controllers\RecoveryController::class, 'index'])->name('attendants.difference');
     Route::get('{attendantId}/differences', [App\Http\Controllers\RecoveryController::class, 'showAttendantDifferences'])->name('show.attendant.differences');
     Route::get('{transactionId}/record', [App\Http\Controllers\RecoveryController::class, 'showAttendantCashierRecord'])->name('show.attendant.record');
+
+    Route::get('/api/short-gain-stats', [ShortGainStatsController::class, 'getStats'])->name('api.short-gain-stats');
 
 });
 Auth::routes();

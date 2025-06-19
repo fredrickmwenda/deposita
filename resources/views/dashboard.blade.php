@@ -143,28 +143,27 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-sm-flex flex-wrap">
-                            <h4 class="card-title mb-4">Deposita Statistics </h4>
-                            <div class="ms-auto">
+                            <h4 class="card-title mb-4">Short/Gain Statistics</h4>
+                            <div class="ms-auto d-flex align-items-center">
+                                <select id="yearSelect" class="form-select form-select-sm me-2" style="width: 100px;">
+                                </select>
                                 <ul class="nav nav-pills">
                                     <li class="nav-item">
-                                        <a class="nav-link " href="javascript:void(0);">Year</a>
+                                        <a class="nav-link" data-period="year" href="javascript:void(0);">Year</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="javascript:void(0);">Week</a>
+                                        <a class="nav-link" data-period="week" href="javascript:void(0);">Week</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="javascript:void(0);">Month</a>
+                                        <a class="nav-link active" data-period="month" href="javascript:void(0);">Month</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="javascript:void(0);">Day</a>
+                                        <a class="nav-link" data-period="day" href="javascript:void(0);">Day</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-
-                        <div data-colors="[&quot;--bs-primary&quot;, &quot;--bs-success&quot;, &quot;--bs-warning&quot;, &quot;--bs-info&quot;]" dir="ltr" id="chart" style="min-height: 365px;">
-
-                        </div>
+                        <div id="shortGainChart" style="min-height: 365px;"></div>
                     </div>
                 </div>
             </div>
@@ -172,28 +171,36 @@
             <div class="col-xl-4">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title mb-3">Best Performing Attendants</h4>
-
-                        <div>
-                            @foreach($topThreePerformers as $CardName => $performance)
-                            <div class="bg-light p-3 d-flex">
-                                <img src="assets/images/users/avatar-2.jpg" alt="" class="avatar-sm rounded me-3">
-                                <div class="flex-grow-1">
-                                    <!-- Attendant name -->
-                                    <h5 class="font-size-15 mb-2"><a href="#" class="text-body">{{ $CardName }}</a></h5>
-                                    <!-- Performance -->
-                                    <p class="mb-0 text-muted"><i class="bx bx-bulb text-body align-middle"></i> Performance: {{ $performance }}%</p>
-                                </div>
+                        <div class="d-sm-flex flex-wrap justify-content-between align-items-center mb-3">
+                            <h4 class="card-title mb-sm-0">Attendant Performance</h4>
+                            <div class="mt-sm-0 mt-2">
+                                <a href="{{ route('attendant.performance') }}" class="btn btn-primary btn-sm">View Details</a>
                             </div>
-                            @endforeach
-
-
-
-                            <a href="{{ route('attendant.performance') }}" class="mt-2">View All </a>
-
                         </div>
-
-
+                        <div class="table-responsive">
+                            <table class="table table-hover table-centered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="width: 10%">Rank</th>
+                                        <th scope="col" style="width: 40%">Attendant</th>
+                                        <th scope="col" style="width: 30%">Short/Gain</th>
+                                        <th scope="col" style="width: 20%">Share</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="attendantPerformanceTable">
+                                    <tr>
+                                        <td colspan="4" class="text-center">Loading data...</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr class="table-light">
+                                        <th colspan="2">Total</th>
+                                        <th id="totalShortGain">0</th>
+                                        <th>100%</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -204,39 +211,7 @@
 @endsection
 @push('js')
 <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
-<script>
-    // Your ApexCharts initialization and data rendering code goes here
-    // Example:
-    var chartData = {
-        !!json_encode($graphData) !!
-    };
-
-    // Initialize ApexCharts
-    var options = {
-        chart: {
-            type: 'line',
-            height: 350,
-        },
-        series: [{
-                name: 'Cashier Rates',
-                data: Object.values(chartData.transactionData.month), // Use Object.values to get an array of values
-            },
-            {
-                name: 'Recovery Rate',
-                data: Object.values(chartData.recoveryData.month), // Use Object.values to get an array of values
-            },
-        ],
-        xaxis: {
-            type: 'category',
-            categories: Object.keys(chartData.transactionData.month),
-        },
-    };
-
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
-    chart.render();
-</script>
-
-
+<script src="{{ asset('assets/js/performance-charts.js') }}"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     // Get the current year
@@ -263,13 +238,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Function to handle filtering and getting short/gain for the selected year
     function filterAndGetData(selectedYear) {
-            // Update dropdown toggle text
+             // Update dropdown toggle text
     document.getElementById("yearDropdown").innerHTML = selectedYear + 
         ' <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>';
 
         // Hide the dropdown menu
     document.getElementById("yearDropdownMenu").classList.remove("show");
-
         // Make an AJAX request to the server to fetch short/gain data for the selected year
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
@@ -290,14 +264,10 @@ document.addEventListener("DOMContentLoaded", function() {
         xhr.send();
     }
 });
-
-
-// Manually toggle dropdown when "Select Year" button is clicked
 document.getElementById("yearDropdown").addEventListener("click", function(event) {
     event.preventDefault();
     document.getElementById("yearDropdownMenu").classList.toggle("show");
 });
 
 </script>
-
 @endpush
