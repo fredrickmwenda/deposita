@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const shortGainOptions = {
         chart: {
             type: 'bar',
-            height: 350,
+            height: 465, // Increased from 350 to 465
             toolbar: {
                 show: true
             },
@@ -64,7 +64,8 @@ document.addEventListener("DOMContentLoaded", function() {
         yaxis: {
             labels: {
                 formatter: function(val) {
-                    return formatNumber(val);
+                    // return formatNumber(val);
+                    return val.toLocaleString();
                 },
                 show: true
             },
@@ -115,8 +116,16 @@ document.addEventListener("DOMContentLoaded", function() {
     const shortGainChart = new ApexCharts(document.querySelector("#shortGainChart"), shortGainOptions);
     shortGainChart.render();
 
-    // Initialize year selector
+    // Get selectors
     const yearSelect = document.getElementById('yearSelect');
+    const monthSelect = document.getElementById('monthSelect');
+    const weekSelect = document.getElementById('weekSelect');
+
+    // Show correct dropdown on load
+    if (chartType === 'month') monthSelect.style.display = '';
+    if (chartType === 'week') weekSelect.style.display = '';
+
+    // Initialize year selector
     for (let year = 2020; year <= 2030; year++) {
         const option = document.createElement('option');
         option.value = year;
@@ -325,17 +334,32 @@ document.addEventListener("DOMContentLoaded", function() {
             });
             this.classList.add('active');
             chartType = this.getAttribute('data-period');
-            updateCharts(chartType, yearSelect.value);
+            // Show/hide selectors
+            monthSelect.style.display = (chartType === 'month') ? '' : 'none';
+            weekSelect.style.display = (chartType === 'week') ? '' : 'none';
+            updateChartsWithSelectors();
         });
     });
 
-    // Year selector change event
-    yearSelect.addEventListener('change', function() {
-        updateCharts(chartType, this.value);
-    });
+    // Event listeners for selectors
+    monthSelect.addEventListener('change', updateChartsWithSelectors);
+    weekSelect.addEventListener('change', updateChartsWithSelectors);
+    yearSelect.addEventListener('change', updateChartsWithSelectors);
 
-    // Initial chart load with year view
-    updateCharts('year', currentYear);
+    function updateChartsWithSelectors() {
+        let periodParam = yearSelect.value;
+        if (chartType === 'month') {
+            periodParam += '-' + monthSelect.value;
+        } else if (chartType === 'week') {
+            periodParam += '-W' + weekSelect.value;
+        } else if (chartType === 'day') {
+            periodParam += '-' + currentMonth + '-' + currentDay;
+        }
+        updateCharts(chartType, periodParam);
+    }
+
+    // Initial chart load
+    updateChartsWithSelectors();
 });
 
 function getCurrentWeek() {

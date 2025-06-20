@@ -145,7 +145,25 @@
                         <div class="d-sm-flex flex-wrap">
                             <h4 class="card-title mb-4">Short/Gain Statistics</h4>
                             <div class="ms-auto d-flex align-items-center">
-                                <select id="yearSelect" class="form-select form-select-sm me-2" style="width: 100px;">
+                                <select id="yearSelect" class="form-select form-select-sm me-2" style="width: 100px;"></select>
+                                <select id="monthSelect" class="form-select form-select-sm me-2" style="width: 100px; display:none;">
+                                    <option value="1">Jan</option>
+                                    <option value="2">Feb</option>
+                                    <option value="3">Mar</option>
+                                    <option value="4">Apr</option>
+                                    <option value="5">May</option>
+                                    <option value="6">Jun</option>
+                                    <option value="7">Jul</option>
+                                    <option value="8">Aug</option>
+                                    <option value="9">Sep</option>
+                                    <option value="10">Oct</option>
+                                    <option value="11">Nov</option>
+                                    <option value="12">Dec</option>
+                                </select>
+                                <select id="weekSelect" class="form-select form-select-sm me-2" style="width: 110px; display:none;">
+                                    @for($w=1; $w<=52; $w++)
+                                        <option value="{{ $w }}">Week {{ $w }}</option>
+                                    @endfor
                                 </select>
                                 <ul class="nav nav-pills">
                                     <li class="nav-item">
@@ -163,7 +181,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div id="shortGainChart" style="min-height: 465px;"></div>
+                        <div id="shortGainChart" style="min-height: 565px;"></div>
                     </div>
                 </div>
             </div>
