@@ -163,7 +163,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div id="shortGainChart" style="min-height: 365px;"></div>
+                        <div id="shortGainChart" style="min-height: 465px;"></div>
                     </div>
                 </div>
             </div>

@@ -12,10 +12,11 @@ class ShortGainStatsController extends Controller
     {
         $type = $request->input('type', 'year');
         $period = $request->input('period');
+        $yesterday = Carbon::yesterday()->toDateString();
 
         $response = [];
         
-        try {
+         try {
             switch($type) {
                 case 'year':
                     $response['monthlyData'] = $this->getYearlyStats($period);
@@ -27,7 +28,7 @@ class ShortGainStatsController extends Controller
                     $response['weeklyData'] = $this->getWeeklyStats($period);
                     break;
                 case 'day':
-                    $response['shiftData'] = $this->getDailyStats($period);
+                    $response['shiftData'] = $this->getDailyStats($yesterday);
                     break;
             }
 
@@ -100,6 +101,7 @@ class ShortGainStatsController extends Controller
 
     private function getDailyStats($date)
     {
+            $yesterday = \Carbon\Carbon::parse($date)->subDay()->toDateString();
         $data = transaction::where('date', $date)
             ->selectRaw('shift, SUM(difference) as total')
             ->groupBy('shift')
