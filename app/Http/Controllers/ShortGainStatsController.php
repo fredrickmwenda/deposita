@@ -12,7 +12,7 @@ class ShortGainStatsController extends Controller
     {
         $type = $request->input('type', 'year');
         $period = $request->input('period');
-        $yesterday = Carbon::yesterday()->toDateString();
+        info("Fetching stats for type: $type, period: $period");
 
         $response = [];
         
@@ -28,7 +28,7 @@ class ShortGainStatsController extends Controller
                     $response['weeklyData'] = $this->getWeeklyStats($period);
                     break;
                 case 'day':
-                    $response['shiftData'] = $this->getDailyStats($yesterday);
+                    $response['shiftData'] = $this->getDailyStats($period);
                     break;
             }
 

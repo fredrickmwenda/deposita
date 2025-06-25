@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\ShortGainStatsController;
+use App\Http\Controllers\AttendantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,6 +106,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 
     Route::get('/api/short-gain-stats', [ShortGainStatsController::class, 'getStats'])->name('api.short-gain-stats');
 
+    Route::resource('attendant', AttendantController::class);
 });
 Auth::routes();
 

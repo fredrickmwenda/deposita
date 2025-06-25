@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendant;
+use App\Models\Card;
+use App\Models\CardAssignment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AttendantController extends Controller
@@ -84,16 +87,40 @@ class AttendantController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'Card_name'=>'required',
-            'Card_number'=> 'required|unique:attendants'
+            'Card_name'   => 'required',
+            'Card_number' => 'required',
         ]);
 
-        $attendant = Attendant::find($id);
-        $attendant->Card_name = $request->Card_name;
-        $attendant->Card_number = $request->Card_number;
+        $attendant = Attendant::findOrFail($id);
+        $card = Card::firstOrCreate(['number' => $request->Card_number]);
+
+        // End previous assignment for this card (if any)
+        $currentAssignment = CardAssignment::where('card_id', $card->id)
+            ->whereNull('assigned_to')
+            ->first();
+        if ($currentAssignment && $currentAssignment->attendant_id != $attendant->id) {
+            $currentAssignment->assigned_to = Carbon::now();
+            $currentAssignment->save();
+        }
+
+        // Create new assignment if not already assigned to this attendant
+        $existing = CardAssignment::where('card_id', $card->id)
+            ->where('attendant_id', $attendant->id)
+            ->whereNull('assigned_to')
+            ->first();
+        if (!$existing) {
+            CardAssignment::create([
+                'attendant_id' => $attendant->id,
+                'card_id' => $card->id,
+                'assigned_from' => Carbon::now(),
+                'assigned_to' => null,
+            ]);
+        }
+
+        $attendant->name = $request->Card_name;
         $attendant->save();
 
-        return redirect()->route('attendant.index')->with('message', 'Attendant Updated Successfully');
+        return redirect()->route('attendant.index')->with('message', 'Attendant and card assignment updated successfully');
     }
 
     /**

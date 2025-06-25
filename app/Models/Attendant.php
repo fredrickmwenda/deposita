@@ -19,4 +19,8 @@ class Attendant extends Model
     {
         return $this->hasMany(Recovery::class, 'attendant_id');
     }
+    public function assignments()
+    {
+        return $this->hasMany(\App\Models\CardAssignment::class);
+    }
 }

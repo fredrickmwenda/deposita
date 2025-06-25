@@ -173,7 +173,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 periodParam = `${period}-W${getCurrentWeek()}`;
                 break;
             case 'day':
-                periodParam = `${period}-${currentMonth}-${currentDay}`;
+                const now = new Date();
+                const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+                const yyyy = yesterday.getFullYear();
+                const mm = String(yesterday.getMonth() + 1).padStart(2, '0');
+                const dd = String(yesterday.getDate()).padStart(2, '0');
+                periodParam = `${yyyy}-${mm}-${dd}`; // ONLY the date!
                 break;
         }
 
@@ -353,7 +358,13 @@ document.addEventListener("DOMContentLoaded", function() {
         } else if (chartType === 'week') {
             periodParam += '-W' + weekSelect.value;
         } else if (chartType === 'day') {
-            periodParam += '-' + currentMonth + '-' + currentDay;
+            // Use yesterday's date in YYYY-MM-DD format
+            const now = new Date();
+            const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+            const yyyy = yesterday.getFullYear();
+            const mm = String(yesterday.getMonth() + 1).padStart(2, '0');
+            const dd = String(yesterday.getDate()).padStart(2, '0');
+            periodParam = `${yyyy}-${mm}-${dd}`; // <-- assignment, not append
         }
         updateCharts(chartType, periodParam);
     }

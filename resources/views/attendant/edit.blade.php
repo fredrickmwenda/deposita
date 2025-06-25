@@ -26,23 +26,22 @@
 						<!-- <h4 class="card-title">Data Storage</h4> -->
 
                         <form action="{{ route('attendant.update', $attendant->id)}}" method="POST">
-                            @csrf                            
+                            @csrf
+                            @method('PUT')
                             <div class="form-group row mb-4">
                                 <label for="card_name">Attendant Name</label>
-                                <input type="text" name="Card_name" class="form-control" value="{{ $attendant->Card_name }}">								
+                                <input type="text" name="Card_name" class="form-control" value="{{ $attendant->name ?? $attendant->Card_name }}">
                             </div>
-
-							<div class="form-group row mb-4">
-                                <label for="card_number">Attendant Number</label>
-                                <input type="text" name="Card_number" class="form-control" value="{{ $attendant->Card_number }}">								
+                            <div class="form-group row mb-4">
+                                <label for="card_number">Card Number</label>
+                                <input type="text" name="Card_number" class="form-control" value="{{ optional($attendant->assignments()->latest('assigned_from')->first())->card->number ?? $attendant->Card_number }}">
+                                <small class="form-text text-muted">Changing the card number will reassign this attendant to a new card and preserve history.</small>
                             </div>
-
-							<div class="d-flex flex-wrap gap-2">
-								<button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
-							</div>
-
-
-						</form>
+                            <div class="d-flex flex-wrap gap-2">
+                                <button type="submit" class="btn btn-primary">Update</button>
+                                <a href="{{ route('attendant.index') }}" class="btn btn-secondary">Cancel</a>
+                            </div>
+                        </form>
 
 					</div>
 				</div>
