@@ -12,6 +12,8 @@ use App\Models\Attendant;
 use App\Models\Coin;
 use App\Models\Recovery;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\CardAssignment;
+use App\Models\Card;
 
 class ShiftsReportController extends Controller
 {
@@ -95,19 +97,32 @@ class ShiftsReportController extends Controller
             $transactions = transaction::orderBy('created_at', 'desc')->take(50)->orderBy('id', 'desc')->get();
             
         }
+
+        // After fetching $transactions, resolve attendant for each transaction using card assignments
+        foreach ($transactions as $transaction) {
+            $assignment = CardAssignment::where('card_id', $transaction->card_id)
+                ->where('assigned_from', '<=', $transaction->created_at)
+                ->where(function($q) use ($transaction) {
+                    $q->whereNull('assigned_to')
+                      ->orWhere('assigned_to', '>=', $transaction->created_at);
+                })
+                ->first();
+            $transaction->attendant_name = $assignment && $assignment->attendant ? $assignment->attendant->name : null;
+        }
+
         return view('report.shifts', compact('transactions', 'total_coins', 'total_drop', 'total_expected', 'total_recovery', 'total_difference', 'fromDate', 'shift', 'total_cash'));
     }
 
  
     public function ShiftsReportTwo(Request $request)
     {
-        $attendants = Attendant::orderBy('Card_name', 'asc')->get();
+        $attendants = Attendant::orderBy('name', 'asc')->get();
         $fromDate = $request->input('from_date') ?? '';
         $toDate = $request->input('to_date') ?? '';
         $attendant = $request->input('attendant') ?? '';
 
         $attendant_name = Attendant::where('id', $attendant)->first();
-        $attendant_jina = $attendant_name ? $attendant_name->Card_name : null;
+        $attendant_jina = $attendant_name ? $attendant_name->name : null;
 
         // Initial totals
         $total_drop = transaction::select('total')->sum('total');
@@ -132,7 +147,11 @@ class ShiftsReportController extends Controller
                     return $query->whereBetween('Date', [$request->from_date, $request->to_date]);
                 })
                 ->when($request->attendant, function ($query) use ($request) {
-                    return $query->where('attendant_id', $request->attendant);
+                    // Instead of filtering by attendant_id, filter by card assignments
+                    $attendantId = $request->attendant;
+                    $cardIds = CardAssignment::where('attendant_id', $attendantId)
+                        ->pluck('card_id')->toArray();
+                    return $query->whereIn('card_id', $cardIds);
                 })
                 ->orderBy('id', 'desc')
                 ->get();
@@ -154,28 +173,37 @@ class ShiftsReportController extends Controller
             $total_recovery = $cashier_data->withSum('recoveries', 'recovery_amount')->value('recoveries_sum_recovery_amount');
             $total_drop = $cashier_data->sum('total') + $total_recovery;
 
+            foreach ($transactions as $transaction) {
+                $assignment = CardAssignment::where('card_id', $transaction->card_id)
+                    ->where('assigned_from', '<=', $transaction->created_at)
+                    ->where(function($q) use ($transaction) {
+                        $q->whereNull('assigned_to')
+                          ->orWhere('assigned_to', '>=', $transaction->created_at);
+                    })
+                    ->first();
+                $transaction->attendant_name = $assignment && $assignment->attendant ? $assignment->attendant->name : null;
+            }
+
         } else if (empty($fromDate) && !empty($attendant)) {
             $transactions = transaction::select('*')
                 ->when($request->attendant, function ($query) use ($request) {
-                    return $query->where('attendant_id', $request->attendant);
+                    $attendantId = $request->attendant;
+                    $cardIds = CardAssignment::where('attendant_id', $attendantId)
+                        ->pluck('card_id')->toArray();
+                    return $query->whereIn('card_id', $cardIds);
                 })
                 ->orderBy('id', 'desc')
                 ->get();
-
-            $cashier_data = transaction::with(['recoveries', 'attendant'])
-                ->select('*')
-                ->when($request->attendant, function ($query) use ($request) {
-                    return $query->where('attendant_id', $request->attendant);
-                })
-                ->withSum('recoveries', 'recovery_amount');
-
-            $total_coins = $cashier_data->sum('coins');
-            $total_cash = $cashier_data->sum('cash');
-            $total_drop = $cashier_data->sum('total');
-            $total_expected = $cashier_data->sum('expected');
-            $total_difference = $cashier_data->sum('difference');
-            $total_recovery = $cashier_data->withSum('recoveries', 'recovery_amount')->value('recoveries_sum_recovery_amount');
-            $total_drop = $cashier_data->sum('total') + $total_recovery;
+            foreach ($transactions as $transaction) {
+                $assignment = CardAssignment::where('card_id', $transaction->card_id)
+                    ->where('assigned_from', '<=', $transaction->created_at)
+                    ->where(function($q) use ($transaction) {
+                        $q->whereNull('assigned_to')
+                          ->orWhere('assigned_to', '>=', $transaction->created_at);
+                    })
+                    ->first();
+                $transaction->attendant_name = $assignment && $assignment->attendant ? $assignment->attendant->name : null;
+            }
         } else {
             $transactions = collect();
         }
@@ -206,7 +234,7 @@ class ShiftsReportController extends Controller
         $transactions = DB::table('cashier_record')
             ->select(
                 'cashier_record.date',
-                'attendants.Card_name as attendant_name',
+                'attendants.name as attendant_name',
                 'cashier_record.coins',
                 'cashier_record.cash',
                 'cashier_record.expected',

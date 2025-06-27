@@ -57,7 +57,7 @@
                                 <tr>
                                     <td>{{ $dataStorage->id }}</td>
                                     <td>{{ $dataStorage->created_at }}</td>
-                                    <td>{{ $dataStorage->Attendant->Card_name}}</td>
+                                    <td>{{ $dataStorage->attendant_name }}</td>
                                     <td>{{ $dataStorage->Card_number }}</td>
                                     
                                     <td>{{ $dataStorage->Sequence }}</td>

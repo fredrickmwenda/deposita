@@ -23,7 +23,7 @@
 					@endif
 					<div class="card-body">
 
-						<h4 class="card-title">Editing Drop List for Attendant: {{ $csv->Attendant->Card_name }}</h4>
+						<h4 class="card-title">Editing Drop List for Attendant: {{ $csv->attendant_name }}</h4>
 
                         <form action="{{ route('storage.update', $csv->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf

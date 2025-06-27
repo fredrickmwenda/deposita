@@ -40,17 +40,14 @@ class AttendantController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'Card_name'=>'required',
-            'Card_number'=> 'required|unique:attendants'
+            'name' => 'required|string|max:255',
+            'status' => 'required|in:active,inactive',
         ]);
-
-        Attendant::create([
-            'Card_name' => $request->Card_name,
-            'Card_number' => $request->Card_number
-        ]);
-        
-
-        return redirect()->route('attendant.index')->with('message', 'Attendant Created Successfully');
+        $attendant = new \App\Models\Attendant();
+        $attendant->name = $request->name;
+        $attendant->status = $request->status;
+        $attendant->save();
+        return redirect()->route('attendant.index')->with('message', 'Attendant created successfully');
     }
 
     /**
@@ -62,7 +59,7 @@ class AttendantController extends Controller
     public function show($id)
     {
         $attendant = Attendant::findOrFail($id);
-        return response()->json(['card_name' => $attendant->Card_name]);
+        return response()->json(['card_name' => $attendant->name]);
     }
 
     /**
@@ -87,40 +84,14 @@ class AttendantController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'Card_name'   => 'required',
-            'Card_number' => 'required',
+            'name' => 'required|string|max:255',
+            'status' => 'required|in:active,inactive',
         ]);
-
-        $attendant = Attendant::findOrFail($id);
-        $card = Card::firstOrCreate(['number' => $request->Card_number]);
-
-        // End previous assignment for this card (if any)
-        $currentAssignment = CardAssignment::where('card_id', $card->id)
-            ->whereNull('assigned_to')
-            ->first();
-        if ($currentAssignment && $currentAssignment->attendant_id != $attendant->id) {
-            $currentAssignment->assigned_to = Carbon::now();
-            $currentAssignment->save();
-        }
-
-        // Create new assignment if not already assigned to this attendant
-        $existing = CardAssignment::where('card_id', $card->id)
-            ->where('attendant_id', $attendant->id)
-            ->whereNull('assigned_to')
-            ->first();
-        if (!$existing) {
-            CardAssignment::create([
-                'attendant_id' => $attendant->id,
-                'card_id' => $card->id,
-                'assigned_from' => Carbon::now(),
-                'assigned_to' => null,
-            ]);
-        }
-
-        $attendant->name = $request->Card_name;
+        $attendant = \App\Models\Attendant::findOrFail($id);
+        $attendant->name = $request->name;
+        $attendant->status = $request->status;
         $attendant->save();
-
-        return redirect()->route('attendant.index')->with('message', 'Attendant and card assignment updated successfully');
+        return redirect()->route('attendant.index')->with('message', 'Attendant updated successfully');
     }
 
     /**
@@ -161,10 +132,10 @@ class AttendantController extends Controller
                 }
     
                 // Store performance for each attendant with Card_name as the key
-                $attendantsPerformance[$attendant->Card_name] = $performance;
+                $attendantsPerformance[$attendant->name] = $performance;
             } else {
                 // Handle case where there are no transactions for the attendant
-                $attendantsPerformance[$attendant->Card_name] = 0;
+                $attendantsPerformance[$attendant->name] = 0;
             }
         }
     

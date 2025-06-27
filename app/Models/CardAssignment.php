@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CardAssignment extends Model
 {
-    protected $fillable = ['attendant_id', 'card_id', 'assigned_from', 'assigned_to'];
+    protected $fillable = ['attendant_id', 'card_id', 'assigned_from', 'assigned_to', 'status'];
 
     public function attendant()
     {

@@ -54,7 +54,7 @@
                                       <td>{{ $attendant->id }}</td>
             
                                       <td>
-                                          {{ $attendant->Card_name}}
+                                          {{ $attendant->name}}
                                       </td>
                                        <td>
                                            {{ $attendant->Card_number}}

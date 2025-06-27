@@ -61,10 +61,10 @@ class HomeController extends Controller
                 }
 
                 // Store performance for each attendant with Card_name as the key
-                $attendantsPerformance[$attendant->Card_name] = $performance;
+                $attendantsPerformance[$attendant->name] = $performance;
             } else {
                 // Handle case where there are no transactions for the attendant
-                $attendantsPerformance[$attendant->Card_name] = 0;
+                $attendantsPerformance[$attendant->name] = 0;
             }
         }
 

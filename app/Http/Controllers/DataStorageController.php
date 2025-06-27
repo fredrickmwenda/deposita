@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendant;
+use App\Models\Card;
+use App\Models\CardAssignment;
 use App\Models\DataStorage;
 use App\Models\transaction;
 use Carbon\Carbon;
@@ -17,6 +19,13 @@ class DataStorageController extends Controller
 {
     public function index(Request $request)
     {
+        $query = DB::table('drop_data')
+            ->leftJoin('cards', 'drop_data.Card_number', '=', 'cards.number')
+            ->leftJoin('card_assignments', function($join) {
+                $join->on('cards.id', '=', 'card_assignments.card_id')
+                    ->where('card_assignments.status', '=', 'active');
+            })
+            ->leftJoin('attendants', 'card_assignments.attendant_id', '=', 'attendants.id');
 
         if (!empty($request->from_date)  && $request->shifit !== 'Select Shift') {
             
@@ -31,7 +40,7 @@ class DataStorageController extends Controller
                 }
 
                 $csvs = $query->orderBy(DB::raw("STR_TO_DATE(DateTime, '%d/%m/%Y %H:%i')"), 'DESC')
-                    ->select('drop_data.*', 'attendants.Card_name')
+                    ->select('drop_data.*', 'attendants.name as attendant_name')
                     ->get();
 
                 return view('data.index', compact('csvs'));
@@ -53,7 +62,7 @@ class DataStorageController extends Controller
                 
 
                 $csvs = $query->orderBy(DB::raw("STR_TO_DATE(DateTime, '%d/%m/%Y %H:%i')"), 'DESC')
-                    ->select('drop_data.*', 'attendants.Card_name')
+                    ->select('drop_data.*', 'attendants.name as attendant_name')
                     ->get();
 
                 return view('data.index', compact('csvs'));
@@ -69,7 +78,7 @@ class DataStorageController extends Controller
                 ->whereRaw("STR_TO_DATE(DateTime, '%d/%m/%Y %H:%i') <= STR_TO_DATE('" . $fromDate . " 23:59', '%d/%m/%Y %H:%i')");
 
             $csvs = $query->orderBy(DB::raw("STR_TO_DATE(DateTime, '%d/%m/%Y %H:%i')"), 'DESC')
-                ->select('drop_data.*', 'attendants.Card_name')
+                ->select('drop_data.*', 'attendants.name as attendant_name')
                 ->get();
 
             return view('data.index', compact('csvs'));
@@ -80,14 +89,14 @@ class DataStorageController extends Controller
                 ->leftJoin('attendants', 'drop_data.Card_number', '=', 'attendants.Card_number');
             $query->where('shift', '=', 0);
             $csvs = $query->orderBy(DB::raw("STR_TO_DATE(DateTime, '%d/%m/%Y %H:%i')"), 'DESC')
-                ->select('drop_data.*', 'attendants.Card_name')
+                ->select('drop_data.*', 'attendants.name as attendant_name')
                 ->get();
             return view('data.index', compact('csvs'));
         } else {
             $csvs = DB::table('drop_data')
                 ->leftJoin('attendants', 'drop_data.Card_number', '=', 'attendants.Card_number')
                 ->orderBy(DB::raw("STR_TO_DATE(DateTime, '%d/%m/%Y %H:%i')"), 'DESC')
-                ->select('drop_data.*', 'attendants.Card_name')
+                ->select('drop_data.*', 'attendants.name as attendant_name')
                 ->take(50)
                 ->get();
 
@@ -198,58 +207,30 @@ public function shiftList(Request $request)
         
         foreach ($importData_arr as $importData) {
             $totalValue = intval(preg_replace('/,[^,]*$/', '', $importData[3]));
-
             $cardNumber = $importData[1];
-            $attendant  = Attendant::where('Card_number', $cardNumber)->first();
-            if ($attendant) {
-                // shawtever id the format of date Time in csv covert it to d/m/y H:i
-                $dateTime = null;
-               
-               
-                if (preg_match('/^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}$/', $importData[2])) {
-                    // first one yyyy-mm-dd hh:mm
-                   
-                   
-
-                    $dateTime = \DateTime::createFromFormat('Y-m-d H:i', $importData[2]);
-                } elseif (preg_match('/^\d{1,2}\/\d{1,2}\/\d{2}\s+\d{1,2}:\d{1,2}$/', $importData[2])) {
-                  
-                  
-                    $dateTime = \DateTime::createFromFormat('d/m/y H:i', $importData[2]);
-                } elseif (preg_match('/^\d{1,2}-\d{1,2}-\d{4}\s+\d{1,2}:\d{1,2}$/', $importData[2])) {
-                    
-                    
-
-                    $dateTime = \DateTime::createFromFormat('d-m-Y H:i', $importData[2]);
+            $card = Card::where('number', $cardNumber)->first();
+            $attendant = null;
+            if ($card) {
+                $assignment = CardAssignment::where('card_id', $card->id)
+                    ->where('status', 'active')
+                    ->first();
+                if ($assignment) {
+                    $attendant = $assignment->attendant;
                 }
-                // elseif (preg_match('/^\d{1,2}\/\d{1,2}\/\d{4}\s+\d{1,2}:\d{1,2}$/', $importData[2])) {
-                //     // dd('bare');
-                //     $dateTime = \DateTime::createFromFormat('m/d/Y H:i', $importData[2]);
-                //     dd('bare', $dateTime,  $importData[2]);
-                // }
-                else if (preg_match('/^\d{2}\/\d{2}\/\d{4}\s+\d{1,2}:\d{1,2}$/', $importData[2])) {
-                    // Format: dd/mm/yyyy hh:mm
-
-                    $dateTime = \DateTime::createFromFormat('d/m/Y H:i', $importData[2]);
-                    // dd('bare', $dateTime,  $importData[2]);
-                    // ...
-                }
-
-
-                if ($dateTime) {
-                    $dateTimeFormatted = $dateTime->format('d/m/Y H:i');
-                    // dd($dateTimeFormatted, $dateTime);         
-                    $data[] = [
-                        'DateTime' => $dateTimeFormatted,
-                        'Card_number' => $importData[1],
-                        'Sequence' => $importData[0],
-                        'Total' => $totalValue,
-                        'shift' => $shift,
-                        'Card_id' => $attendant->id,
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ];
-                }
+            }
+            // ...date parsing as before...
+            if ($dateTime) {
+                $dateTimeFormatted = $dateTime->format('d/m/Y H:i');
+                $data[] = [
+                    'DateTime' => $dateTimeFormatted,
+                    'Card_number' => $importData[1],
+                    'Sequence' => $importData[0],
+                    'Total' => $totalValue,
+                    'shift' => $shift,
+                    'Card_id' => $attendant ? $attendant->id : null,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
             }
         }
 

@@ -129,7 +129,7 @@
                                             @endif                                          
                                         </td>
                                         <td>
-                                            {{ $csv->Card_name}}
+                                            {{ $csv->attendant_name }}
                                         </td>
                                         <td>
                                             {{ number_format($csv->Total) }}

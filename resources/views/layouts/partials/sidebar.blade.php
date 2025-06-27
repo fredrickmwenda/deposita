@@ -51,6 +51,9 @@
                                 <ul class="sub-menu mm-collapse" aria-expanded="false">
                                     <li><a href="{{ route('attendant.index') }}" key="t-task-list">Attendant List</a></li>
                                     <li><a href="{{ route('attendant.create') }}" key="t-create-task">Create Attendant</a></li>
+                                    <li><a href="{{ route('card-assignment.index') }}" key="t-card-assignment">Card Assignment</a></li>
+                                    <li><a href="{{ route('card.index') }}" key="t-card-list">Cards</a></li>
+                                    <li><a href="{{ route('card.create') }}" key="t-create-card">Create Card</a></li>
                                     @if (Auth::user()->grant_role === 'full_control')
                                     <li><a href="{{ route('attendant.performance') }}" key="t-create-task">Attendants Performance</a></li>
                                     @endif

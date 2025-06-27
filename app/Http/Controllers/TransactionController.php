@@ -33,7 +33,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        $attendants = Attendant::orderBy('Card_name', 'asc')->get();
+        $attendants = Attendant::orderBy('name', 'asc')->get();
         return view('transactions.create', compact('attendants'));
     }
 
@@ -322,7 +322,7 @@ class TransactionController extends Controller
     //        $totalSum = 0;
 
     //        $attendant = Attendant::find($attendantId);
-    //        $attendant = $attendant->Card_name;
+    //        $attendant = $attendant->name;
 
 
     //        // Loop through the datastorages and convert each Total string to a float before adding it to the sum
@@ -350,7 +350,7 @@ class TransactionController extends Controller
         $totalSum = 0;
 
         $attendant = Attendant::find($attendantId);
-        $attendant = $attendant->Card_name;
+        $attendant = $attendant->name;
 
         // Loop through the datastorages and convert each Total string to a float before adding it to the sum
         foreach ($dataStorages as $dataStorage) {
@@ -377,7 +377,7 @@ class TransactionController extends Controller
 
 
         $attendant = Attendant::find($transaction->attendant_id);
-        $attendant = $attendant->Card_name;
+        $attendant = $attendant->name;
 
 
         // Loop through the datastorages and convert each Total string to a float before adding it to the sum
