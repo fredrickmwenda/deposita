@@ -115,37 +115,58 @@ class ShortGainStatsController extends Controller
         return array_values($shiftData);
     }
 
-    private function getAttendantPerformance($startDate, $endDate)
+        private function getAttendantPerformance($startDate, $endDate)
     {
-        $transactions = \App\Models\transaction::whereBetween('date', [$startDate->format('Y-m-d'), $endDate->format('Y-m-d')])->get();
-        $attendantStats = [];
-        foreach ($transactions as $transaction) {
-            $assignment = \App\Models\CardAssignment::where('card_id', $transaction->card_id)
-                ->where('assigned_from', '<=', $transaction->created_at)
-                ->where(function($q) use ($transaction) {
-                    $q->whereNull('assigned_to')
-                      ->orWhere('assigned_to', '>=', $transaction->created_at);
-                })
-                ->first();
-            $attendantName = $assignment && $assignment->attendant ? $assignment->attendant->name : null;
-            if ($attendantName) {
-                if (!isset($attendantStats[$attendantName])) {
-                    $attendantStats[$attendantName] = [
-                        'name' => $attendantName,
-                        'difference' => 0,
-                        'absolute_difference' => 0
-                    ];
-                }
-                $attendantStats[$attendantName]['difference'] += (float)$transaction->difference;
-                $attendantStats[$attendantName]['absolute_difference'] += abs((float)$transaction->difference);
-            }
-        }
-        // Sort by absolute_difference descending
-        usort($attendantStats, function($a, $b) {
-            return $b['absolute_difference'] <=> $a['absolute_difference'];
-        });
-        return collect($attendantStats);
+        return \App\Models\transaction::with('attendant')
+            ->whereBetween('date', [$startDate->format('Y-m-d'), $endDate->format('Y-m-d')])
+            ->selectRaw('attendant_id, SUM(difference) as total_difference, SUM(ABS(difference)) as absolute_difference')
+            ->groupBy('attendant_id')
+            ->orderBy('absolute_difference', 'desc')  // Order by absolute value to show highest impact
+            ->get()
+            ->filter(function($transaction) {
+                // Filter out any transactions without attendant info
+                return $transaction->attendant && $transaction->attendant->name;
+            })
+            ->map(function($transaction) {
+                return [
+                    'name' => $transaction->attendant->name,
+                    'difference' => (float)$transaction->total_difference,
+                    'absolute_difference' => (float)$transaction->absolute_difference
+                ];
+            });
     }
+
+    // private function getAttendantPerformance($startDate, $endDate)
+    // {
+    //     $transactions = \App\Models\transaction::whereBetween('date', [$startDate->format('Y-m-d'), $endDate->format('Y-m-d')])->get();
+    //     $attendantStats = [];
+    //     foreach ($transactions as $transaction) {
+    //         $assignment = \App\Models\CardAssignment::where('card_id', $transaction->card_id)
+    //             ->where('assigned_from', '<=', $transaction->created_at)
+    //             ->where(function($q) use ($transaction) {
+    //                 $q->whereNull('assigned_to')
+    //                   ->orWhere('assigned_to', '>=', $transaction->created_at);
+    //             })
+    //             ->first();
+    //         $attendantName = $assignment && $assignment->attendant ? $assignment->attendant->name : null;
+    //         if ($attendantName) {
+    //             if (!isset($attendantStats[$attendantName])) {
+    //                 $attendantStats[$attendantName] = [
+    //                     'name' => $attendantName,
+    //                     'difference' => 0,
+    //                     'absolute_difference' => 0
+    //                 ];
+    //             }
+    //             $attendantStats[$attendantName]['difference'] += (float)$transaction->difference;
+    //             $attendantStats[$attendantName]['absolute_difference'] += abs((float)$transaction->difference);
+    //         }
+    //     }
+    //     // Sort by absolute_difference descending
+    //     usort($attendantStats, function($a, $b) {
+    //         return $b['absolute_difference'] <=> $a['absolute_difference'];
+    //     });
+    //     return collect($attendantStats);
+    // }
 
     private function getAttendantsData($type, $period)
     {

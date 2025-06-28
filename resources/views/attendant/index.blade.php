@@ -57,7 +57,7 @@
                                           {{ $attendant->name}}
                                       </td>
                                        <td>
-                                           {{ $attendant->Card_number}}
+                                           {{ $attendant->activeCardNumber ?? 0}}
                                         </td>
 
 

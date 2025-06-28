@@ -129,7 +129,7 @@
                                 <tr>
                                     
                                     <td>{{ $transaction->date }}</td>
-                                    <td>{{ $transaction->attendant->Card_name }}</td>
+                                    <td>{{ $transaction->attendant->name }}</td>
                                     <td>{{number_format(floatval($transaction->total) + floatval($transaction->coins) + floatval($transaction->cash) + floatval($transaction->recoveries->sum('recovery_amount'))) }}</td>
                                     <td>{{number_format(floatval($transaction->cash) ) }}</td>
                                     <td>{{number_format( floatval($transaction->coins) ) }}</td>

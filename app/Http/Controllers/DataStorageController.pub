@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use DateTime;
-use PhpOffice\PhpSpreadsheet\Shared\Date as ExcelDate;
+use PHPExcel_Shared_Date;
 
 class DataStorageController extends Controller
 {
@@ -140,139 +140,6 @@ public function shiftList(Request $request)
 }
  
 
-    public function newImportCsv(Request $request)
-    {
-        $request->validate([
-            'csv_file' => 'required|mimes:csv,txt,xlsx'
-        ]);
-
-        if ($request->shift == 'day') {
-            $shift = 0;
-        } else {
-            $shift = 1;
-        }
-
-        $file = $request->file('csv_file');
-        $filename = time() . '.' . $file->getClientOriginalExtension();
-        $file->move('assets/uploads/csv/', $filename);
-        $filepath = public_path('assets/uploads/csv/' . $filename);
-
-        $requiredHeaders = [
-            "Device Transaction Index",
-            "Card Number",
-            "Transaction Date",
-            "Amount"
-        ];
-
-        // Read file into $rows
-        if ($file->getClientOriginalExtension() === 'xlsx') {
-            $rows = Excel::toArray([], $filepath)[0];
-        } else {
-            $rows = [];
-            $handle = fopen($filepath, "r");
-            while (($filedata = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                $rows[] = $filedata;
-            }
-            fclose($handle);
-        }
-
-        // Find header row and build header map
-        $headerRowIndex = null;
-        $headerMap = [];
-        foreach ($rows as $i => $row) {
-            $trimmed = array_map('trim', $row);
-            $matches = array_intersect($requiredHeaders, $trimmed);
-            if (count($matches) === count($requiredHeaders)) {
-                $headerRowIndex = $i;
-                foreach ($trimmed as $idx => $header) {
-                    if (in_array($header, $requiredHeaders)) {
-                        $headerMap[$header] = $idx;
-                    }
-                }
-                break;
-            }
-        }
-        if ($headerRowIndex === null) {
-            return back()->with('error', 'Header row not found or missing required columns.');
-        }
-
-        // Extract only rows below the header
-        $importData_arr = array_slice($rows, $headerRowIndex + 1);
-
-        $data = [];
-        foreach ($importData_arr as $row) {
-            // Skip empty or incomplete rows
-            if (count(array_filter($row)) === 0) continue;
-
-            $deviceTransactionIndex = $row[$headerMap["Device Transaction Index"]] ?? null;
-            $cardNumber = $row[$headerMap["Card Number"]] ?? null;
-            $transactionDate = $row[$headerMap["Transaction Date"]] ?? null;
-            $amount = $row[$headerMap["Amount"]] ?? null;
-
-            // Only process if all required fields are present
-            if ($deviceTransactionIndex && $cardNumber && $transactionDate && $amount) {
-                // Date conversion logic (same as importCsv)
-                $dateTime = null;
-                if (is_numeric($transactionDate)) {
-                    // Excel serial date
-                    $unixTimestamp = ExcelDate::excelToTimestamp($transactionDate);
-                    $dateTime = new DateTime("@$unixTimestamp");
-                } else {
-                    // Try to parse as string
-                    try {
-                        $dateTime = new DateTime($transactionDate);
-                    } catch (Exception $e) {
-                        $dateTime = null;
-                    }
-                }
-                $dateStr = $dateTime ? $dateTime->format('d/m/Y H:i') : $transactionDate;
-
-                $card = Card::where('number', $cardNumber)->first();
-                $attendant = null;
-                if ($card) {
-                    $assignment = CardAssignment::where('card_id', $card->id)
-                        ->where('status', 'active')
-                        ->first();
-                    if ($assignment) {
-                        $attendant = $assignment->attendant;
-                    }
-                }
-
-                $data[] = [
-                    'Sequence' => $deviceTransactionIndex,
-                    'Card_Number' => $cardNumber,
-                    'DateTime' => $dateStr,
-                    'Shift' => $shift,
-                    'Total' => $amount,
-                    'Card_id' => $card ? $card->id : null,
-                    // 'Attendant_id' => $attendant ? $attendant->id : null,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ];
-            }
-        }
-
-        if (empty($data)) {
-            return redirect()->route('storage.create')->with('error', 'No valid data found in the file');
-        }
-
-        // Prevent duplicate insertions by Device Transaction Index
-        $indices = array_column($data, 'Sequence');
-        $db = DataStorage::whereIn('Sequence', $indices)->pluck('Sequence')->toArray();
-        $data = array_filter($data, function($row) use ($db) {
-            return !in_array($row['Sequence'], $db);
-        });
-
-        if (count($data) > 0) {
-            DataStorage::insert($data);
-            unlink($filepath);
-        } else {
-            return redirect()->route('storage.create')->with('error', 'Data already exists in the database');
-        }
-
-        return redirect()->route('transaction.create')->with('message', 'Data imported successfully');
-    }
-
     // import csv file
     public function importCsv(Request $request)
     {
@@ -305,8 +172,9 @@ public function shiftList(Request $request)
             }
             array_shift($importData_arr);
             foreach ($importData_arr as &$row) {
+
                 $excelDate = $row[2];
-                $unixTimestamp =  ExcelDate::excelToTimestamp($excelDate);
+                $unixTimestamp =  PHPExcel_Shared_Date::ExcelToPHP($excelDate);
                 $dateTime = new DateTime("@$unixTimestamp");
                 $dateStr = $dateTime->format('Y-m-d H:i');
                 $row[2] = $dateStr;

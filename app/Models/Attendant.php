@@ -23,4 +23,16 @@ class Attendant extends Model
     {
         return $this->hasMany(\App\Models\CardAssignment::class);
     }
+    //get the card number of an attendant that is active in cardAssignment
+    public function activeCardNumber(){
+        $assigned_card = CardAssignment::where('attendant_id', $this->id)->where('status', 'active')->first();
+        if($assigned_card){
+            $card = Card::where('id', $assigned_card->card_id)->first();
+    
+        $active_card = $card->number;
+            return $active_card;
+        }
+       return null;
+
+    }
 }

@@ -52,7 +52,7 @@
                                 @foreach ($recoveries as $dataStorage)
                                 <tr>
                                     <td>{{ $dataStorage->created_at }}</td>
-                                    <td>{{ $dataStorage->transaction->Attendant->Card_name}}</td>
+                                    <td>{{ $dataStorage->transaction->Attendant->name}}</td>
                                     <td>{{ $dataStorage->recovery_amount }}</td>
                         
                                 </tr>

@@ -32,7 +32,7 @@
                     <div class="card-body">
                         <div class="row mb-2">
                             <div class="col-sm-4">
-                                <h4 class="card-title">Cashier Record for {{$transaction->attendant->Card_name}} on {{$transaction->created_at}} {{ $transaction->shift }}</h4>
+                                <h4 class="card-title">Cashier Record for {{$transaction->attendant->name}} on {{$transaction->created_at}} {{ $transaction->shift }}</h4>
                             </div>
 
                         </div>
@@ -76,7 +76,7 @@
                                     <td>{{ $transaction->date }}</td>
                                     <td>{{ $transaction->shift }}</td>  
                                     <td>
-                                    <a href="{{ route('showAttendantDrops', ['attendantId' => $transaction->attendant_id]) }}" class="fw-bold">{{ $transaction->attendant->Card_name }}</a></td>
+                                    <a href="{{ route('showAttendantDrops', ['attendantId' => $transaction->attendant_id]) }}" class="fw-bold">{{ $transaction->attendant->name }}</a></td>
                                     <td>{{ number_format($transaction->total) }} </td>
                                     <td>{{ number_format(floatval($transaction->cash)) }} </td>
 
@@ -110,7 +110,7 @@
                                             </button>
                                             @if (Auth::user()->grant_role === 'full_control' || Auth::user()->grant_role === 'modify')
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#add-recovery-modal" data-transaction-id="{{ $transaction->id }}"  data-attendant-date="{{$transaction->date}}" data-attendant-name="{{ $transaction->attendant->Card_name }}">Add Recovery</button>
+                                                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#add-recovery-modal" data-transaction-id="{{ $transaction->id }}"  data-attendant-date="{{$transaction->date}}" data-attendant-name="{{ $transaction->attendant->name }}">Add Recovery</button>
                                                 <a class="dropdown-item" href="{{ route('transaction.edit', $transaction->id) }}" class="text-danger">Edit </a>
                                                 <a class="dropdown-item" href="{{ route('transaction.delete', $transaction->id) }}" class="text-danger">Delete </a>
                                             </div>

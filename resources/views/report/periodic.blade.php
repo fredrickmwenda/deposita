@@ -66,7 +66,7 @@
                                                     <select class="form-control" name="attendant" id="attendant">
                                                         <option value="">Select Attendant</option>
                                                         @foreach($attendants as $attendant)
-                                                        <option value="{{$attendant->id}}">{{$attendant->Card_name}} </option>
+                                                        <option value="{{$attendant->id}}">{{$attendant->name}} </option>
                                                         @endforeach
                                                     </select>                                               
                                                 </div>
@@ -116,7 +116,7 @@
                               @foreach ($transactions as $transaction)
                                 <tr>
                                     <!-- <td>{{ $transaction->id }}</td> -->
-                                    <!-- <td>{{ $transaction->attendant->Card_name }}</td> -->
+                                    <!-- <td>{{ $transaction->attendant->name }}</td> -->
                                     <td>{{ $transaction->date }}</td>
                                     <td>{{ $transaction->shift }}</td>
                                     <td>{{number_format(floatval($transaction->total) + floatval($transaction->coins) + floatval($transaction->cash) + floatval($transaction->recoveries->sum('recovery_amount'))) }}</td>

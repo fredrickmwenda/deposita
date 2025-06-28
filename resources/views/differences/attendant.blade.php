@@ -26,7 +26,7 @@
                     <div class="card-body">
                         <div class="row mb-2">
                             <div class="col-sm-4">
-                                <h4 class="card-title">{{ $attendant->Card_name }}'s Short/Gains</h4>
+                                <h4 class="card-title">{{ $attendant->name }}'s Short/Gains</h4>
                             </div>
 
                             <!-- end col-->

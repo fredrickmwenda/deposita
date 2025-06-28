@@ -29,10 +29,10 @@
 										<select id="attendant_name"name="attendant_id" id="attendant" class="form-control select2" required disabled>
 											<option value="">Select Attendant</option>
 											@foreach($attendants as $attendant)
-												<option value="{{$attendant->id}}" {{ $transaction->attendant_id == $attendant->id  ? 'selected' : '' }}>{{$attendant->Card_name}}</option>
+												<option value="{{$attendant->id}}" {{ $transaction->attendant_id == $attendant->id  ? 'selected' : '' }}>{{$attendant->name}}</option>
 											@endforeach
 										</select>
-										<!-- <input type="text" class="form-control"  required  value="{{ $transaction->attendant->Card_name }}" readonly> -->
+										<!-- <input type="text" class="form-control"  required  value="{{ $transaction->attendant->name }}" readonly> -->
 										
 									</div>									
 								</div>
@@ -283,8 +283,8 @@
 						$.each(data.attendantsData, function(key, value) {										
 							$("#attendant").append('<option value="' + key + '">' + value + '</option>');
 						});
-						// $.each(data.attendantsData, function(id, Card_name) {
-						// 	var option = new Option(Card_name, id);
+						// $.each(data.attendantsData, function(id, name) {
+						// 	var option = new Option(name, id);
 						// 	$('#attendant').append(option);
 						// });
 					}

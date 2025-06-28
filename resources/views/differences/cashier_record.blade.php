@@ -28,7 +28,7 @@
                     <div class="card-body">
                         <div class="row mb-2">
                             <div class="col-sm-4">
-                                <h4 class="card-title">Cashier Record for {{$transaction->attendant->Card_name}} on {{$transaction->created_at}} {{ $transaction->shift }}</h4>
+                                <h4 class="card-title">Cashier Record for {{$transaction->attendant->name}} on {{$transaction->created_at}} {{ $transaction->shift }}</h4>
                             </div>
 
                         </div>
@@ -61,7 +61,7 @@
                                     <td>{{ $transaction->date }}</td>
                                     <td>{{ $transaction->shift }}</td>  
                                     <td>
-                                    <a href="{{ route('showAttendantDrops', ['attendantId' => $transaction->attendant_id]) }}" class="fw-bold">{{ $transaction->attendant->Card_name }}</a></td>
+                                    <a href="{{ route('showAttendantDrops', ['attendantId' => $transaction->attendant_id]) }}" class="fw-bold">{{ $transaction->attendant->name }}</a></td>
                                     <td>{{ number_format($transaction->total) }} </td>
                                     <td>{{ number_format(floatval($transaction->cash)) }} </td>
 

@@ -46,7 +46,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
     Route::get('storage/list', [App\Http\Controllers\DataStorageController::class, 'shiftList'])->name('storage.list');
     Route::get('storage/edit/{id}', [App\Http\Controllers\DataStorageController::class, 'edit'])->name('storage.edit');
     Route::post('storage/update/{id}', [App\Http\Controllers\DataStorageController::class, 'update'])->name('storage.update');
-    Route::post('storage/csv', [App\Http\Controllers\DataStorageController::class,'importCsv'])->name('storage.import');
+    Route::post('storage/csv', [App\Http\Controllers\DataStorageController::class,'newImportCsv'])->name('storage.import');
     //delete route using GET method
     Route::get('storage/delete/{id}', [App\Http\Controllers\DataStorageController::class, 'delete'])->name('storage.delete');
     //show route using GET method

@@ -52,7 +52,7 @@
                                     @if ($sumDifference != 0)
                                     <tr>
                                         <td>{{ $attendantId }}</td>
-                                        <td>{{ $attendant->Card_name }}</td>
+                                        <td>{{ $attendant->name }}</td>
                                         <td>
                                             <a href="{{ route('show.attendant.differences', ['attendantId' => $attendantId]) }}" class="fw-bold">{{ $sumDifference }}</a>
                                         </td>
