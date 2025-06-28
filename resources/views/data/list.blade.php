@@ -135,7 +135,7 @@
                                         <td>{{ $transaction->date }}</td>
                                         <td>{{ $transaction->shift }}</td>
                                         <td>
-                                            <a href="{{ route('showAttendantDrops', ['attendantId' => $transaction->attendant_id, 'TransactionDate' => $transaction->date]) }}" class="fw-bold">{{ $transaction->attendant_name }}</a>
+                                            <a href="{{ route('showAttendantDrops', ['attendantId' => $transaction->attendant_id, 'TransactionDate' => $transaction->date]) }}" class="fw-bold">{{ $transaction->attendant->name }}</a>
                                         </td>
                                         <td>{{ number_format($transaction->total) }} </td>
                                         <td>{{ number_format(floatval($transaction->cash)) }} </td>
