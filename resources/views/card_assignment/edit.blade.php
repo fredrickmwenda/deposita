@@ -32,6 +32,14 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="mb-3">
+                                <label for="card_id" class="form-label">Assigned From:</label>
+                               <input type="datetime-local" class="form-control" name="assigned_from" value="{{$assignment->assigned_from}}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="card_id" class="form-label">Assigned To:</label>
+                               <input type="datetime-local" class="form-control" name="assigned_to" value="{{$assignment->assigned_to}}">
+                            </div>
                             <button type="submit" class="btn btn-primary">Update</button>
                         </form>
                         <form action="{{ route('card-assignment.destroy', $assignment->id) }}" method="POST" class="mt-2">

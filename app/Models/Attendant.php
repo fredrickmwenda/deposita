@@ -31,6 +31,8 @@ class Attendant extends Model
     
         $active_card = $card->number;
             return $active_card;
+        }else{
+            return 0;
         }
        return null;
 

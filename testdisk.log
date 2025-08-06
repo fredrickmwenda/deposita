@@ -1,0 +1,519 @@
+
+
+Sun Jul  6 02:40:30 2025
+Command line: TestDisk
+
+TestDisk 7.1, Data Recovery Utility, July 2019
+Christophe GRENIER <grenier@cgsecurity.org>
+https://www.cgsecurity.org
+OS: Linux, kernel 6.8.0-60-generic (#63~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 22 19:00:15 UTC 2) x86_64
+Compiler: GCC 11.2
+ext2fs lib: 1.46.5, ntfs lib: libntfs-3g, reiserfs lib: none, ewf lib: none, curses lib: ncurses 6.3
+/dev/sda: LBA, HPA, LBA48, DCO support
+/dev/sda: size       500118192 sectors
+/dev/sda: user_max   500118192 sectors
+/dev/sda: native_max 500118192 sectors
+Warning: can't get size for Disk /dev/mapper/control - 0 B - 0 sectors, sector size=512
+/dev/mapper/vgubuntu-root: LBA, HPA, LBA48, DCO support
+/dev/mapper/vgubuntu-root: size       491208704 sectors
+/dev/mapper/vgubuntu-root: user_max   500118192 sectors
+/dev/mapper/vgubuntu-root: native_max 500118192 sectors
+/dev/mapper/vgubuntu-swap_1: LBA, HPA, LBA48, DCO support
+/dev/mapper/vgubuntu-swap_1: size       7806976 sectors
+/dev/mapper/vgubuntu-swap_1: user_max   500118192 sectors
+/dev/mapper/vgubuntu-swap_1: native_max 500118192 sectors
+/dev/dm-0: LBA, HPA, LBA48, DCO support
+/dev/dm-0: size       491208704 sectors
+/dev/dm-0: user_max   500118192 sectors
+/dev/dm-0: native_max 500118192 sectors
+/dev/dm-1: LBA, HPA, LBA48, DCO support
+/dev/dm-1: size       7806976 sectors
+/dev/dm-1: user_max   500118192 sectors
+/dev/dm-1: native_max 500118192 sectors
+Warning: can't get size for Disk /dev/loop23 - 0 B - 0 sectors, sector size=512
+Hard disk list
+Disk /dev/sda - 256 GB / 238 GiB - CHS 31130 255 63, sector size=512 - Samsung SSD 850 PRO 256GB, S/N:S251NWAG209674R, FW:EXM02B6Q
+Disk /dev/sdb - 1000 GB / 931 GiB - CHS 121601 255 63, sector size=512 - ST1000LM 035-1RK172, FW:RSM7
+Disk /dev/mapper/vgubuntu-root - 251 GB / 234 GiB - 491208704 sectors, sector size=512 - Samsung SSD 850 PRO 256GB, S/N:S251NWAG209674R, FW:EXM02B6Q
+Disk /dev/mapper/vgubuntu-swap_1 - 3997 MB / 3812 MiB - 7806976 sectors, sector size=512 - Samsung SSD 850 PRO 256GB, S/N:S251NWAG209674R, FW:EXM02B6Q
+Disk /dev/dm-0 - 251 GB / 234 GiB - 491208704 sectors, sector size=512 - Samsung SSD 850 PRO 256GB, S/N:S251NWAG209674R, FW:EXM02B6Q
+Disk /dev/dm-1 - 3997 MB / 3812 MiB - 7806976 sectors, sector size=512 - Samsung SSD 850 PRO 256GB, S/N:S251NWAG209674R, FW:EXM02B6Q
+Disk /dev/loop0 - 4096 B - 8 sectors (RO), sector size=512
+Disk /dev/loop1 - 13 MB / 12 MiB - 25912 sectors (RO), sector size=512
+Disk /dev/loop10 - 253 MB / 241 MiB - 495504 sectors (RO), sector size=512
+Disk /dev/loop11 - 529 MB / 505 MiB - 1034424 sectors (RO), sector size=512
+Disk /dev/loop12 - 366 MB / 349 MiB - 716176 sectors (RO), sector size=512
+Disk /dev/loop13 - 541 MB / 516 MiB - 1056784 sectors (RO), sector size=512
+Disk /dev/loop14 - 181 MB / 173 MiB - 354320 sectors (RO), sector size=512
+Disk /dev/loop15 - 96 MB / 91 MiB - 187776 sectors (RO), sector size=512
+Disk /dev/loop16 - 13 MB / 12 MiB - 26472 sectors (RO), sector size=512
+Disk /dev/loop17 - 12 MB / 12 MiB - 24984 sectors (RO), sector size=512
+Disk /dev/loop18 - 181 MB / 173 MiB - 354352 sectors (RO), sector size=512
+Disk /dev/loop19 - 53 MB / 50 MiB - 104232 sectors (RO), sector size=512
+Disk /dev/loop2 - 14 MB / 13 MiB - 27800 sectors (RO), sector size=512
+Disk /dev/loop20 - 589 KB / 576 KiB - 1152 sectors (RO), sector size=512
+Disk /dev/loop21 - 53 MB / 50 MiB - 104240 sectors (RO), sector size=512
+Disk /dev/loop22 - 581 KB / 568 KiB - 1136 sectors (RO), sector size=512
+Disk /dev/loop3 - 58 MB / 55 MiB - 113656 sectors (RO), sector size=512
+Disk /dev/loop4 - 58 MB / 55 MiB - 113384 sectors (RO), sector size=512
+Disk /dev/loop5 - 66 MB / 63 MiB - 130592 sectors (RO), sector size=512
+Disk /dev/loop6 - 66 MB / 63 MiB - 130592 sectors (RO), sector size=512
+Disk /dev/loop7 - 77 MB / 73 MiB - 151352 sectors (RO), sector size=512
+Disk /dev/loop8 - 77 MB / 73 MiB - 151320 sectors (RO), sector size=512
+Disk /dev/loop9 - 253 MB / 241 MiB - 495608 sectors (RO), sector size=512
+
+Partition table type (auto): EFI GPT
+Disk /dev/sdb - 1000 GB / 931 GiB - ST1000LM 035-1RK172
+Partition table type: EFI GPT
+
+Analyse Disk /dev/sdb - 1000 GB / 931 GiB - CHS 121601 255 63
+hdr_size=92
+hdr_lba_self=1
+hdr_lba_alt=1953525167 (expected 1953525167)
+hdr_lba_start=34
+hdr_lba_end=1953525134
+hdr_lba_table=2
+hdr_entries=128
+hdr_entsz=128
+check_part_gpt failed for partition
+ 2 P MS Reserved               534528     567295      32768 [Microsoft reserved partition]
+Current partition structure:
+ 1 P EFI System                  2048     534527     532480 [EFI system partition]
+No FAT, NTFS, ext2, JFS, Reiser, cramfs or XFS marker
+ 2 P MS Reserved               534528     567295      32768 [Microsoft reserved partition]
+ 2 P MS Reserved               534528     567295      32768 [Microsoft reserved partition]
+ 3 P MS Data                   567296 1922129919 1921562624 [Basic data partition] [Windows]
+ 4 P Windows Recovery Env  1922129920 1924136959    2007040 [Basic data partition]
+ 5 P MS Data               1924136960 1953511423   29374464 [Basic data partition] [RECOVERY]
+
+search_part()
+Disk /dev/sdb - 1000 GB / 931 GiB - CHS 121601 255 63
+FAT32 at 0/32/33
+FAT1 : 7166-7678
+FAT2 : 7679-8191
+start_rootdir : 8192 root cluster : 2
+Data : 8192-532479
+sectors : 532480
+cluster_size : 8
+no_of_cluster : 65536 (2 - 65537)
+fat_length 513 calculated 513
+set_FAT_info: name from BS used
+
+FAT32 at 0/32/33
+FAT: cluster=2(0x2), pos=10240
+     EFI System                  2048     534527     532480 [EFI System Partition] [NO NAME]
+     FAT32, blocksize=4096, 272 MB / 260 MiB
+NTFS at 35/79/45
+filesystem size           1921562624
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+NTFS part_offset=290455552, part_size=983840063488, sector_size=512
+NTFS partition cannot be added (part_offset<part_size).
+NTFS at 35/79/45
+filesystem size           1921562624
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+     MS Data                   567296 1922129919 1921562624 [Windows]
+     NTFS, blocksize=4096, 983 GB / 916 GiB
+NTFS at 119647/13/47
+filesystem size           2007040
+sectors_per_cluster       8
+mft_lcn                   83626
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+     MS Data               1920122881 1922129920    2007040
+     NTFS found using backup sector, blocksize=4096, 1027 MB / 980 MiB
+NTFS at 119647/13/47
+filesystem size           2007040
+sectors_per_cluster       8
+mft_lcn                   83626
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+     MS Data               1922129920 1924136959    2007040 [Windows RE tools]
+     NTFS, blocksize=4096, 1027 MB / 980 MiB
+NTFS at 119771/251/33
+filesystem size           29374464
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+     MS Data               1894762497 1924136960   29374464
+     NTFS found using backup sector, blocksize=4096, 15 GB / 14 GiB
+NTFS at 119771/251/33
+filesystem size           29374464
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+     MS Data               1924136960 1953511423   29374464 [RECOVERY]
+     NTFS, blocksize=4096, 15 GB / 14 GiB
+NTFS at 121601/57/56
+filesystem size           29386752
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+     MS Data               1924136960 1953523711   29386752 [RECOVERY]
+     NTFS found using backup sector, blocksize=4096, 15 GB / 14 GiB
+NTFS at 121601/57/56
+filesystem size           29386752
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+NTFS: Can't read MFT
+     MS Data               1953523711 1982910462   29386752
+     NTFS, blocksize=4096, 15 GB / 14 GiB
+This partition ends after the disk limits. (start=1953523711, size=29386752, end=1982910462, disk end=1953525168)
+Disk /dev/sdb - 1000 GB / 931 GiB - CHS 121601 255 63
+Check the harddisk size: HD jumper settings, BIOS detection...
+The harddisk (1000 GB / 931 GiB) seems too small! (< 1015 GB / 945 GiB)
+The following partition can't be recovered:
+     MS Data               1953523711 1982910462   29386752
+     NTFS, blocksize=4096, 15 GB / 14 GiB
+
+Results
+   P EFI System                  2048     534527     532480 [EFI System Partition] [NO NAME]
+     FAT32, blocksize=4096, 272 MB / 260 MiB
+     MS Data                   567296 1922129919 1921562624 [Windows]
+     NTFS, blocksize=4096, 983 GB / 916 GiB
+     MS Data               1894762497 1924136960   29374464
+     NTFS found using backup sector, blocksize=4096, 15 GB / 14 GiB
+     MS Data               1920122881 1922129920    2007040
+     NTFS found using backup sector, blocksize=4096, 1027 MB / 980 MiB
+     MS Data               1922129920 1924136959    2007040 [Windows RE tools]
+     NTFS, blocksize=4096, 1027 MB / 980 MiB
+     MS Data               1924136960 1953511423   29374464 [RECOVERY]
+     NTFS, blocksize=4096, 15 GB / 14 GiB
+     MS Data               1924136960 1953523711   29386752 [RECOVERY]
+     NTFS found using backup sector, blocksize=4096, 15 GB / 14 GiB
+
+Hint for advanced users: dmsetup may be used if you prefer to avoid rewriting the partition table for the moment:
+echo "0 532480 linear /dev/sdb 2048" | dmsetup create test0
+echo "0 1921562624 linear /dev/sdb 567296" | dmsetup create test1
+echo "0 29374464 linear /dev/sdb 1894762497" | dmsetup create test2
+echo "0 2007040 linear /dev/sdb 1920122881" | dmsetup create test3
+echo "0 2007040 linear /dev/sdb 1922129920" | dmsetup create test4
+echo "0 29374464 linear /dev/sdb 1924136960" | dmsetup create test5
+echo "0 29386752 linear /dev/sdb 1924136960" | dmsetup create test6
+Incomplete multi-sector transfer: magic: 0x58444e49  size: 4096  usa_ofs: 40  usa_count: 3  data: 13955  usn: 13954: Input/output error
+Corrupt index block signature: vcn 0 inode 5
+ntfs_mst_post_read_fixup_warn: magic: 0x00000000  size: 1024   usa_ofs: 0  usa_count: 0: Invalid argument
+Record 0 has no FILE magic (0x0)
+Failed to load $MFT: Input/output error
+ntfs_mst_post_read_fixup_warn: magic: 0x00000000  size: 1024   usa_ofs: 0  usa_count: 0: Invalid argument
+Record 0 has no FILE magic (0x0)
+Failed to load $MFT: Input/output error
+ntfs_mst_post_read_fixup_warn: magic: 0x00000000  size: 1024   usa_ofs: 0  usa_count: 0: Invalid argument
+Record 0 has no FILE magic (0x0)
+Failed to load $MFT: Input/output error
+ntfs_mst_post_read_fixup_warn: magic: 0x00000000  size: 1024   usa_ofs: 0  usa_count: 0: Invalid argument
+Record 0 has no FILE magic (0x0)
+Failed to load $MFT: Input/output error
+ntfs_device_testdisk_io_ioctl() unimplemented
+NTFS Volume is dirty.
+
+
+dir_partition inode=5
+     MS Data                   567296 1922129919 1921562624 [Windows]
+     NTFS, blocksize=4096, 983 GB / 916 GiB
+ntfs_readdir failed for cluster 5: Input/output error
+Directory /
+       5 dr-xr-xr-x     0      0         0  2-Jul-2025 06:56 .
+       5 dr-xr-xr-x     0      0         0  2-Jul-2025 06:56 ..
+ntfs_device_testdisk_io_ioctl() unimplemented
+ntfs_device_testdisk_io_ioctl() unimplemented
+
+     MS Data               1894762497 1924136960   29374464
+     NTFS found using backup sector, blocksize=4096, 15 GB / 14 GiB
+Can't open filesystem. Filesystem seems damaged.
+ntfs_device_testdisk_io_ioctl() unimplemented
+ntfs_device_testdisk_io_ioctl() unimplemented
+
+     MS Data               1920122881 1922129920    2007040
+     NTFS found using backup sector, blocksize=4096, 1027 MB / 980 MiB
+Can't open filesystem. Filesystem seems damaged.
+
+interface_write()
+ 1 P EFI System                  2048     534527     532480 [EFI System Partition] [NO NAME]
+simulate write!
+Partition table type (auto): EFI GPT
+Disk /dev/sdb - 1000 GB / 931 GiB - ST1000LM 035-1RK172
+Partition table type: Intel
+
+Analyse Disk /dev/sdb - 1000 GB / 931 GiB - CHS 121601 255 63
+Geometry from i386 MBR: head=255 sector=63
+check_part_i386 1 type EE: no test
+Current partition structure:
+ 1 P EFI GPT                  0   0  2 267349  89  4 4294967295
+
+Bad sector count.
+No partition is bootable
+
+search_part()
+Disk /dev/sdb - 1000 GB / 931 GiB - CHS 121601 255 63
+FAT32 at 0/32/33
+FAT1 : 7166-7678
+FAT2 : 7679-8191
+start_rootdir : 8192 root cluster : 2
+Data : 8192-532479
+sectors : 532480
+cluster_size : 8
+no_of_cluster : 65536 (2 - 65537)
+fat_length 513 calculated 513
+set_FAT_info: name from BS used
+
+FAT32 at 0/32/33
+FAT: cluster=2(0x2), pos=10240
+     FAT32                    0  32 33    33  69 36     532480 [EFI System Partition] [NO NAME]
+     FAT32, blocksize=4096, 272 MB / 260 MiB
+NTFS at 35/79/45
+filesystem size           1921562624
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+     HPFS - NTFS             35  79 45 119647  13 46 1921562624 [Windows]
+     NTFS, blocksize=4096, 983 GB / 916 GiB
+NTFS at 119647/13/47
+filesystem size           2007040
+sectors_per_cluster       8
+mft_lcn                   83626
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+     HPFS - NTFS          119647  13 47 119771 251 32    2007040 [Windows RE tools]
+     NTFS, blocksize=4096, 1027 MB / 980 MiB
+NTFS at 119771/251/33
+filesystem size           29374464
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+     HPFS - NTFS          119771 251 33 121600 117 53   29374464 [RECOVERY]
+     NTFS, blocksize=4096, 15 GB / 14 GiB
+NTFS at 121601/57/56
+filesystem size           29386752
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+     HPFS - NTFS          119771 251 33 121601  57 56   29386752 [RECOVERY]
+     NTFS found using backup sector, blocksize=4096, 15 GB / 14 GiB
+NTFS at 121601/57/56
+filesystem size           29386752
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+NTFS: Can't read MFT
+     HPFS - NTFS          121601  57 56 123430 119 16   29386752
+     NTFS, blocksize=4096, 15 GB / 14 GiB
+This partition ends after the disk limits. (start=1953523711, size=29386752, end=1982910462, disk end=1953525168)
+Disk /dev/sdb - 1000 GB / 931 GiB - CHS 121601 255 63
+Check the harddisk size: HD jumper settings, BIOS detection...
+The harddisk (1000 GB / 931 GiB) seems too small! (< 1015 GB / 945 GiB)
+The following partition can't be recovered:
+     HPFS - NTFS          121601  57 56 123430 119 16   29386752
+     NTFS, blocksize=4096, 15 GB / 14 GiB
+
+Results
+   * FAT32                    0  32 33    33  69 36     532480 [EFI System Partition] [NO NAME]
+     FAT32, blocksize=4096, 272 MB / 260 MiB
+   P HPFS - NTFS             35  79 45 119647  13 46 1921562624 [Windows]
+     NTFS, blocksize=4096, 983 GB / 916 GiB
+   P HPFS - NTFS          119647  13 47 119771 251 32    2007040 [Windows RE tools]
+     NTFS, blocksize=4096, 1027 MB / 980 MiB
+     HPFS - NTFS          119771 251 33 121600 117 53   29374464 [RECOVERY]
+     NTFS, blocksize=4096, 15 GB / 14 GiB
+     HPFS - NTFS          119771 251 33 121601  57 56   29386752 [RECOVERY]
+     NTFS found using backup sector, blocksize=4096, 15 GB / 14 GiB
+
+Hint for advanced users: dmsetup may be used if you prefer to avoid rewriting the partition table for the moment:
+echo "0 532480 linear /dev/sdb 2048" | dmsetup create test0
+echo "0 1921562624 linear /dev/sdb 567296" | dmsetup create test1
+echo "0 2007040 linear /dev/sdb 1922129920" | dmsetup create test2
+echo "0 29374464 linear /dev/sdb 1924136960" | dmsetup create test3
+echo "0 29386752 linear /dev/sdb 1924136960" | dmsetup create test4
+Change partition type:
+     No partition         119771 251 33 121600 254 63   29383105
+add_ext_part_i386: max
+add_ext_part_i386: min
+
+interface_write()
+ 1 E extended                 0  32 32    33 254 63     544163
+ 2 P HPFS - NTFS             35  79 45 119647  13 46 1921562624 [Windows]
+ 3 P HPFS - NTFS          119647  13 47 119771 251 32    2007040 [Windows RE tools]
+ 5 L FAT32                    0  32 33    33  69 36     532480 [EFI System Partition] [NO NAME]
+add_ext_part_i386: max
+
+interface_write()
+ 1 E extended                 0  32 32    34 254 63     560228
+ 2 P HPFS - NTFS             35  79 45 119647  13 46 1921562624 [Windows]
+ 3 P HPFS - NTFS          119647  13 47 119771 251 32    2007040 [Windows RE tools]
+ 5 L FAT32                    0  32 33    33  69 36     532480 [EFI System Partition] [NO NAME]
+add_ext_part_i386: min
+
+interface_write()
+ 1 E extended                 0  32 32    33 254 63     544163
+ 2 P HPFS - NTFS             35  79 45 119647  13 46 1921562624 [Windows]
+ 3 P HPFS - NTFS          119647  13 47 119771 251 32    2007040 [Windows RE tools]
+ 5 L FAT32                    0  32 33    33  69 36     532480 [EFI System Partition] [NO NAME]
+
+search_part()
+Disk /dev/sdb - 1000 GB / 931 GiB - CHS 121601 255 63
+FAT32 at 0/32/33
+FAT1 : 7166-7678
+FAT2 : 7679-8191
+start_rootdir : 8192 root cluster : 2
+Data : 8192-532479
+sectors : 532480
+cluster_size : 8
+no_of_cluster : 65536 (2 - 65537)
+fat_length 513 calculated 513
+set_FAT_info: name from BS used
+
+FAT32 at 0/32/33
+FAT: cluster=2(0x2), pos=10240
+     FAT32                    0  32 33    33  69 36     532480 [EFI System Partition] [NO NAME]
+     FAT32, blocksize=4096, 272 MB / 260 MiB
+FAT32 at 0/32/39
+FAT1 : 7166-7678
+FAT2 : 7679-8191
+start_rootdir : 8192 root cluster : 2
+Data : 8192-532479
+sectors : 532480
+cluster_size : 8
+no_of_cluster : 65536 (2 - 65537)
+fat_length 513 calculated 513
+FAT differs, FAT sectors=496-512/513
+set_FAT_info: name from BS used
+
+FAT32 at 0/32/39
+FAT: cluster=2(0x2), pos=10240
+     FAT32                    0  32 33    33  69 36     532480 [EFI System Partition] [NO NAME]
+     FAT32, blocksize=4096, 272 MB / 260 MiB
+NTFS at 121601/57/56
+filesystem size           29386752
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+     HPFS - NTFS          119771 251 33 121601  57 56   29386752 [RECOVERY]
+     NTFS found using backup sector, blocksize=4096, 15 GB / 14 GiB
+NTFS at 121601/57/56
+filesystem size           29386752
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+NTFS: Can't read MFT
+     HPFS - NTFS          121601  57 56 123430 119 16   29386752
+     NTFS, blocksize=4096, 15 GB / 14 GiB
+This partition ends after the disk limits. (start=1953523711, size=29386752, end=1982910462, disk end=1953525168)
+NTFS at 119771/251/32
+filesystem size           2007040
+sectors_per_cluster       8
+mft_lcn                   83626
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+Search for partition aborted
+Disk /dev/sdb - 1000 GB / 931 GiB - CHS 121601 255 63
+Check the harddisk size: HD jumper settings, BIOS detection...
+The harddisk (1000 GB / 931 GiB) seems too small! (< 1015 GB / 945 GiB)
+The following partition can't be recovered:
+     HPFS - NTFS          121601  57 56 123430 119 16   29386752
+     NTFS, blocksize=4096, 15 GB / 14 GiB
+
+Results
+   * FAT32                    0  32 33    33  69 36     532480 [EFI System Partition] [NO NAME]
+     FAT32, blocksize=4096, 272 MB / 260 MiB
+     HPFS - NTFS          119771 251 32 119896 234 17    2007040
+     NTFS, blocksize=4096, 1027 MB / 980 MiB
+     HPFS - NTFS          119771 251 33 121601  57 56   29386752 [RECOVERY]
+     NTFS found using backup sector, blocksize=4096, 15 GB / 14 GiB
+
+Hint for advanced users: dmsetup may be used if you prefer to avoid rewriting the partition table for the moment:
+echo "0 532480 linear /dev/sdb 2048" | dmsetup create test0
+echo "0 2007040 linear /dev/sdb 1924136959" | dmsetup create test1
+echo "0 29386752 linear /dev/sdb 1924136960" | dmsetup create test2
+ntfs_mst_post_read_fixup_warn: magic: 0xf9cb492f  size: 1024   usa_ofs: 56288  usa_count: 22904: Invalid argument
+Record 0 has no FILE magic (0xf9cb492f)
+Failed to load $MFT: Input/output error
+ntfs_mst_post_read_fixup_warn: magic: 0xf9cb492f  size: 1024   usa_ofs: 56288  usa_count: 22904: Invalid argument
+Record 0 has no FILE magic (0xf9cb492f)
+Failed to load $MFT: Input/output error
+ntfs_mst_post_read_fixup_warn: magic: 0xf9cb492f  size: 1024   usa_ofs: 56288  usa_count: 22904: Invalid argument
+Record 0 has no FILE magic (0xf9cb492f)
+Failed to load $MFT: Input/output error
+ntfs_mst_post_read_fixup_warn: magic: 0xf9cb492f  size: 1024   usa_ofs: 56288  usa_count: 22904: Invalid argument
+Record 0 has no FILE magic (0xf9cb492f)
+Failed to load $MFT: Input/output error
+ntfs_device_testdisk_io_ioctl() unimplemented
+ntfs_device_testdisk_io_ioctl() unimplemented
+Not an exFAT boot sector.
+ntfs_device_testdisk_io_ioctl() unimplemented
+ntfs_device_testdisk_io_ioctl() unimplemented
+
+     HPFS - NTFS          119771 251 32 119896 234 17    2007040
+     NTFS, blocksize=4096, 1027 MB / 980 MiB
+Can't open filesystem. Filesystem seems damaged.
+ntfs_device_testdisk_io_ioctl() unimplemented
+
+
+dir_partition inode=5
+     HPFS - NTFS          119771 251 33 121601  57 56   29386752 [RECOVERY]
+     NTFS found using backup sector, blocksize=4096, 15 GB / 14 GiB
+Directory /
+       5 dr-xr-xr-x     0      0         0 16-Jun-2025 21:02 .
+       5 dr-xr-xr-x     0      0         0 16-Jun-2025 21:02 ..
+     300 dr-xr-xr-x     0      0         0 24-May-2025 15:43 $RECYCLE.BIN
+     105 dr-xr-xr-x     0      0         0 18-Oct-2017 04:57 Boot
+     221 dr-xr-xr-x     0      0         0 18-Oct-2017 04:57 EFI
+      36 dr-xr-xr-x     0      0         0 18-Oct-2017 04:57 Recovery
+     296 dr-xr-xr-x     0      0         0 10-Feb-2021 11:24 System Volume Information
+      38 dr-xr-xr-x     0      0         0 18-Oct-2017 04:57 preload
+     288 dr-xr-xr-x     0      0         0 18-Oct-2017 04:57 sources
+     325 -r--r--r--     0      0     22370 12-Sep-2019 09:06 ISAAC MURIRA -CV.docx
+      39 -r--r--r--     0      0        55 18-Oct-2017 04:51 RP.ini
+     103 -r--r--r--     0      0    395220 18-Mar-2017 17:14 bootmgr
+     104 -r--r--r--     0      0   1203616 18-Mar-2017 18:28 bootmgr.efi
+
+
+dir_partition inode=0
+   * FAT32                    0  32 33    33  69 36     532480 [EFI System Partition] [NO NAME]
+     FAT32, blocksize=4096, 272 MB / 260 MiB
+FAT: cluster=2(0x2), pos=10240
+Directory /
+       3 drwxr-xr-x     0      0         0 17-Oct-2017 17:39 EFI
+   21364 drwxr-xr-x     0      0         0 17-Oct-2017 19:14 System Volume Information
+X     47 drwxr-xr-x     0      0      4096 24-May-2018 20:39 MSI88eed.tmp
+
+interface_write()
+ 1 * FAT32                    0  32 33    33  69 36     532480 [EFI System Partition] [NO NAME]
+simulate write!
+
+write_mbr_i386: starting...
+write_all_log_i386: starting...
+No extended partition
+
+TestDisk exited normally.

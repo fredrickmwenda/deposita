@@ -33,6 +33,14 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="mb-3">
+                                <label for="card_id" class="form-label">Assigned From:</label>
+                               <input type="datetime-local" class="form-control" name="assigned_from">
+                            </div>
+                            <div class="mb-3">
+                                <label for="card_id" class="form-label">Assigned To:</label>
+                               <input type="datetime-local" class="form-control" name="assigned_to">
+                            </div>
                             <button type="submit" class="btn btn-primary">Assign</button>
                         </form>
                     </div>

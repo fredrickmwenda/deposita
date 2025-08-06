@@ -16,7 +16,7 @@
                             <li>
                                 <a class="has-arrow waves-effect">
                                     <!--upload icon in i tag-->
-                                    <i class="bx bx-git-pull-request"></i>
+                                    <i class="bx bx-upload"></i>
                                     <span key="t-ecommerce">Drop Record</span>
                                 </a>
                                 <ul class="sub-menu mm-collapse" aria-expanded="false">
@@ -45,18 +45,29 @@
 
                             <li>
                                 <a  class="has-arrow waves-effect">
-                                    <i class="bx bx-user"></i>
+                                    <i class="bx bx-user-x"></i>
                                     <span key="t-tasks">Attendants</span>
                                 </a>
                                 <ul class="sub-menu mm-collapse" aria-expanded="false">
                                     <li><a href="{{ route('attendant.index') }}" key="t-task-list">Attendant List</a></li>
                                     <li><a href="{{ route('attendant.create') }}" key="t-create-task">Create Attendant</a></li>
-                                    <li><a href="{{ route('card-assignment.index') }}" key="t-card-assignment">Card Assignment</a></li>
-                                    <li><a href="{{ route('card.index') }}" key="t-card-list">Cards</a></li>
-                                    <li><a href="{{ route('card.create') }}" key="t-create-card">Create Card</a></li>
                                     @if (Auth::user()->grant_role === 'full_control')
                                     <li><a href="{{ route('attendant.performance') }}" key="t-create-task">Attendants Performance</a></li>
                                     @endif
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a  class="has-arrow waves-effect">
+                                    <i class="bx bx-card"></i>
+                                    <span key="t-card">Cards</span>
+                                </a>
+                                <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                    <li><a href="{{ route('card.index') }}" key="t-card-list">Cards</a></li>
+                                    <li><a href="{{ route('card.create') }}" key="t-create-card">Create Card</a></li>
+                                    <li><a href="{{ route('card-assignment.index') }}" key="t-card-assignment">Card Assignment</a></li>
+                                    
+
                                 </ul>
                             </li>
 
